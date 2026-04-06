@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     Cannon[] cannons;
     //Testing movement...
     Vector2 movementDir = Vector2.zero;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -25,6 +26,18 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetMouseButtonDown(1)) //right click
         {
             cannons[1].Shoot();
+        }
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            PlayerData.currentHealth -= 15;
+            Debug.Log("Player new health: " + PlayerData.currentHealth);
+        }
+
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            PlayerData.currentHealth += 15;
+            Debug.Log("Player new health: " + PlayerData.currentHealth);
         }
     }
     void FixedUpdate()

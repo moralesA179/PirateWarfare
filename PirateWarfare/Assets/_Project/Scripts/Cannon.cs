@@ -4,7 +4,7 @@ public class Cannon : MonoBehaviour
 {
     // Bullet to shoot
     public GameObject projectile;
-    private bool reloading = false;
+    public bool reloading = false;
 
     //timer to prevent spam
     private int currentDelay = 0;
