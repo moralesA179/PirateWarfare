@@ -57,6 +57,6 @@
 1. Homing Projectiles
 2. Richochet Projectiles
 3. Optic Cannon (Shoots Projectiles that are beam types like lasers or lightning)
-4. Basic Debuff Projectiles ($\color{red}{\textsf{Fire for DoT}}$ & $\color{red}{\textsf{Ice for slowing enemies}}$)
+4. Basic Debuff Projectiles ($\color{red}{\textsf{Fire for DoT}}$ & $\color{blue}{\textsf{Ice for slowing enemies}}$)
 
 Of course, if yall come up with any ideas feel free to add, these were just some I came up from looking at our document.
