@@ -51,4 +51,11 @@ public class PlayerData : MonoBehaviour
 
     }
 
+    public static void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        HealthUIManager.UpdateHealthUI(damage);
+    }
+
 }
