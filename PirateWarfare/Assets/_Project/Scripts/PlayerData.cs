@@ -9,7 +9,7 @@ public class PlayerData : MonoBehaviour
         Low = 2
     }
 
-    public static int maxHealth = 100, currentHealth = maxHealth, score = 0;
+    public static int maxHealth = 100, currentHealth, score = 0;
     public static float speedMult = 1f;
     //public static ItemList[] <-- Future(We need to keep track of current items player has)
 
@@ -18,6 +18,7 @@ public class PlayerData : MonoBehaviour
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        currentHealth = PlayerPrefs.GetInt("health", maxHealth); //when loading into the game either start with previous health or the maximum starting health (100)
     }
 
     private void Update()
@@ -55,7 +56,14 @@ public class PlayerData : MonoBehaviour
     {
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-        HealthUIManager.UpdateHealthUI(damage);
+        HealthUIManager.UpdateHealthUI(damage, false);
+    }
+
+    public static void Heal(int healAmount)
+    {
+        healAmount = Mathf.Clamp(healAmount, 0, maxHealth);
+        currentHealth += healAmount;
+        HealthUIManager.UpdateHealthUI(healAmount, true);
     }
 
 }

@@ -11,6 +11,11 @@ public class HeartIcon : MonoBehaviour
         uiImage = GetComponent<Image>();
     }
 
+    public void Update()
+    {
+        //Debug.Log($"Heart HP: {heartHealth}");
+    }
+
     public int UpdateHeart(int damage)
     {
         heartHealth -= damage;
@@ -23,7 +28,14 @@ public class HeartIcon : MonoBehaviour
             uiImage.sprite = states[1]; //half heart
         } else //greater than 10 HP
         {
+            Debug.Log("half heart");
             uiImage.sprite = states[0]; //full heart
+            if(heartHealth > 20)
+            {
+                int excess = heartHealth - 20;
+                heartHealth = 20;
+                return excess; //excess healing
+            }
         }
         return 0;
     }
@@ -31,5 +43,9 @@ public class HeartIcon : MonoBehaviour
     public bool IsEmpty()
     {
         return uiImage.sprite == states[2];
+    }
+    public bool IsFull()
+    {
+        return heartHealth == 20; //important to do it this way since just checking the sprite isn't helpful given a full heart is displayed at any HP above 10
     }
 }
