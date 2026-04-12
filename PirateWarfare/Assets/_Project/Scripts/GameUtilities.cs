@@ -28,6 +28,7 @@ public class GameUtilities : MonoBehaviour
             #if UNITY_EDITOR
             EditorApplication.isPlaying = false;
             #endif
+            Application.Quit();
         });
 
         if(healButton != null)
