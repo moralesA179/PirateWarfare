@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CannonCombat : MonoBehaviour
@@ -20,4 +21,5 @@ public class CannonCombat : MonoBehaviour
             animator.SetTrigger("Shoot");
         }
     }
+
 }
