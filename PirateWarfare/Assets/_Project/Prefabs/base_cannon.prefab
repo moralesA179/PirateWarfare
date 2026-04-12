@@ -77,8 +77,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 54162853
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: -6507258221562037406, guid: 3e91c341b2a0f124f93ad2f02e3ea500, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -104,6 +104,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectile: {fileID: 6094743184788806419, guid: a316a7edb534b68498d7bd90a2e56239, type: 3}
+  reloading: 0
+  type: 0
+  maxProjectileCount: 3
   targetDelay: 320
 --- !u!95 &5613838877171932785
 Animator:
@@ -139,6 +142,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5cfb066b87075b43adf01c711bc12ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  side: 0
+  cannon: {fileID: 0}
 --- !u!1 &6378385944646447331
 GameObject:
   m_ObjectHideFlags: 0
