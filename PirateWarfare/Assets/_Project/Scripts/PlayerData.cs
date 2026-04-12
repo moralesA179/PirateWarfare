@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerData : MonoBehaviour
 {
@@ -23,17 +24,6 @@ public class PlayerData : MonoBehaviour
 
     private void Update()
     {
-        if (currentHealth <= 0)
-        {
-            currentHealth = 0;
-            Destroy(gameObject);
-        }
-
-        if (currentHealth >= maxHealth)
-        {
-            currentHealth = maxHealth;
-        }
-
         // Modifies the ships sprite based on their health
        if (currentHealth <= (maxHealth * 0.25))
         {
@@ -57,12 +47,19 @@ public class PlayerData : MonoBehaviour
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         HealthUIManager.UpdateHealthUI(damage, false);
+        if (currentHealth == 0)
+        { 
+
+            SceneManager.LoadScene("GameOver");
+            //Debug.Log("This ran");
+        }
     }
 
     public static void Heal(int healAmount)
     {
         healAmount = Mathf.Clamp(healAmount, 0, maxHealth);
         currentHealth += healAmount;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         HealthUIManager.UpdateHealthUI(healAmount, true);
     }
 

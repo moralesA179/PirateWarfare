@@ -6,6 +6,8 @@ public class PirateAnimation : MonoBehaviour
     public Sprite[] sprites;
     private int counter = 0;
     private int timer = 0;
+    [Tooltip("How many frames must pass before switching to next sprite.")]
+    public int maxTime = 50;
     Image image;
     private void Start()
     {
@@ -19,7 +21,7 @@ public class PirateAnimation : MonoBehaviour
         {
             counter = 0;
         }
-        if(timer > 30)
+        if(timer > maxTime)
         {
             image.sprite = sprites[counter++];
             timer = 0;

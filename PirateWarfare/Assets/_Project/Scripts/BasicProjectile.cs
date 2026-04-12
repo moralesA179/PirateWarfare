@@ -7,6 +7,8 @@ public class BasicProjectile : MonoBehaviour
     [Range(100f, 1000f)]
     public float lifeTime;
     public enum ProjectileTypes { Base, Richochet };
+
+    public bool enemy = false;
     public ProjectileTypes type;
     Rigidbody2D rb;
 
@@ -26,21 +28,41 @@ public class BasicProjectile : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!collision.collider.CompareTag("Player"))
+        if(enemy)
         {
-            switch(type)
+            if(collision.collider.CompareTag("Player"))
             {
-                case ProjectileTypes.Base:
-                    lifeTime = 0; //immediately kill upon collision
-                    break;
-                case ProjectileTypes.Richochet:
-                    rb.linearVelocity = -rb.linearVelocity;
-                    break;
+                Debug.Log("I collided with the player from enemy!");
+                switch(type)
+                {
+                    case ProjectileTypes.Base:
+                        lifeTime = 0; //immediately kill upon collision with player
+                        break;
+                    case ProjectileTypes.Richochet:
+                        rb.linearVelocity = -rb.linearVelocity;
+                        break;
+                }
+                PlayerData.TakeDamage(10);
             }
         }
         else
         {
-            Physics2D.IgnoreCollision(collision.collider, collision.otherCollider); //need to do something else for this once enemies are added
+            if (!collision.collider.CompareTag("Player"))
+            {
+                switch (type)
+                {
+                    case ProjectileTypes.Base:
+                        lifeTime = 0; //immediately kill upon collision
+                        break;
+                    case ProjectileTypes.Richochet:
+                        rb.linearVelocity = -rb.linearVelocity;
+                        break;
+                }
+            }
+            else
+            {
+                Physics2D.IgnoreCollision(collision.collider, collision.otherCollider); //need to do something else for this once enemies are added
+            }
         }
     }
 }

@@ -9,6 +9,7 @@ public class CannonWall : MonoBehaviour
     void Start()
     {
         cannon = GetComponentInChildren<Cannon>();
+        cannon.enemy = true;
         animator = GetComponentInChildren<Animator>();
         StartCoroutine(RandomShootRoutine());
     }

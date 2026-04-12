@@ -103,9 +103,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5960ee95357486f4e92b98f7258d195f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 6094743184788806419, guid: a316a7edb534b68498d7bd90a2e56239, type: 3}
+  projectile: {fileID: 7860781618485091648, guid: a316a7edb534b68498d7bd90a2e56239, type: 3}
   reloading: 0
   projectileSpeed: 4
+  enemy: 0
   type: 0
   maxProjectileCount: 3
   targetDelay: 320
