@@ -16,7 +16,7 @@ public class CannonCombat : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(side) && !cannon.reloading) //left click
+        if (Input.GetMouseButtonDown(side) && !cannon.reloading && gameObject.CompareTag("Player")) //left click
         {
             animator.SetTrigger("Shoot");
         }

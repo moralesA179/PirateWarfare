@@ -49,8 +49,9 @@ public class PlayerData : MonoBehaviour
         HealthUIManager.UpdateHealthUI(damage, false);
         if (currentHealth == 0)
         { 
+
             SceneManager.LoadScene("GameOver");
-            Debug.Log("This ran");
+            //Debug.Log("This ran");
         }
     }
 

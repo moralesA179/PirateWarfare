@@ -5,10 +5,11 @@ using UnityEngine;
 public class Cannon : MonoBehaviour
 {
     // Bullet to shoot
-    public GameObject projectile;
+    public BasicProjectile projectile;
     public bool reloading = false;
     private bool burstDone = true;
     public float projectileSpeed = 4.0f;
+    public bool enemy = false; //used to determine what type of projectile to shoot (friendly or not)
     public enum CannonTypes {Base, Shotgun, Burst};
     public CannonTypes type;
     [Range(3, 10)]
@@ -43,7 +44,7 @@ public class Cannon : MonoBehaviour
     }
     public void Shoot()
     {
-        GameObject cannonBall; 
+        BasicProjectile cannonBall; 
         Rigidbody2D rb;
         if (projectile != null && !reloading && burstDone) //if bullet exists and your arent currently reloading
         {
@@ -51,6 +52,7 @@ public class Cannon : MonoBehaviour
             {
                 case CannonTypes.Base:
                     cannonBall = Instantiate(projectile, transform.position, Quaternion.identity);
+                    cannonBall.enemy = enemy;
                     rb = cannonBall.GetComponent<Rigidbody2D>();
                     rb.linearVelocity = transform.right * projectileSpeed;
                     reloading = true;
@@ -74,6 +76,7 @@ public class Cannon : MonoBehaviour
             for (int i = 0; i < maxProjectileCount; i++)
             {
                 cannonBall = Instantiate(projectile, transform.position, Quaternion.identity);
+                cannonBall.enemy = enemy;
                 rb = cannonBall.GetComponent<Rigidbody2D>();
                 rb.linearVelocity = transform.right * projectileSpeed;
                 yield return new WaitForSeconds(0.1f);
@@ -88,6 +91,7 @@ public class Cannon : MonoBehaviour
             for(float i = -45f; i <= 45; i+= angleStep)
             {
                 cannonBall = Instantiate(projectile, transform.position, Quaternion.identity);
+                cannonBall.enemy = enemy;
                 rb = cannonBall.GetComponent<Rigidbody2D>();
                 Vector3 rotatedVector = Quaternion.AngleAxis(i, transform.forward.normalized) * transform.right; //rotating 30 degrees around z axis
                 rb.linearVelocity = rotatedVector * projectileSpeed;
