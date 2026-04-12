@@ -8,6 +8,7 @@ public class Cannon : MonoBehaviour
     public GameObject projectile;
     public bool reloading = false;
     private bool burstDone = true;
+    public float projectileSpeed = 4.0f;
     public enum CannonTypes {Base, Shotgun, Burst};
     public CannonTypes type;
     [Range(3, 10)]
@@ -51,7 +52,7 @@ public class Cannon : MonoBehaviour
                 case CannonTypes.Base:
                     cannonBall = Instantiate(projectile, transform.position, Quaternion.identity);
                     rb = cannonBall.GetComponent<Rigidbody2D>();
-                    rb.linearVelocity = transform.right * 3f;
+                    rb.linearVelocity = transform.right * projectileSpeed;
                     reloading = true;
                     break;
                 case CannonTypes.Shotgun:
@@ -74,7 +75,7 @@ public class Cannon : MonoBehaviour
             {
                 cannonBall = Instantiate(projectile, transform.position, Quaternion.identity);
                 rb = cannonBall.GetComponent<Rigidbody2D>();
-                rb.linearVelocity = transform.right * 3f;
+                rb.linearVelocity = transform.right * projectileSpeed;
                 yield return new WaitForSeconds(0.1f);
             }
             burstDone = true;
@@ -89,7 +90,7 @@ public class Cannon : MonoBehaviour
                 cannonBall = Instantiate(projectile, transform.position, Quaternion.identity);
                 rb = cannonBall.GetComponent<Rigidbody2D>();
                 Vector3 rotatedVector = Quaternion.AngleAxis(i, transform.forward.normalized) * transform.right; //rotating 30 degrees around z axis
-                rb.linearVelocity = rotatedVector * 3f;
+                rb.linearVelocity = rotatedVector * projectileSpeed;
             }
         }
     }
