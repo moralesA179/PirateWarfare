@@ -105,6 +105,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectile: {fileID: 6094743184788806419, guid: a316a7edb534b68498d7bd90a2e56239, type: 3}
   reloading: 0
+  projectileSpeed: 4
   type: 0
   maxProjectileCount: 3
   targetDelay: 320
@@ -217,9 +218,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 54162853
+  m_SortingLayer: 5
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7072590022351340806, guid: a02f19a345472b449ae0fc6f873daa83, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
