@@ -2,13 +2,14 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!78 &1
 TagManager:
-  serializedVersion: 2
-  tags: []
+  serializedVersion: 3
+  tags:
+  - World
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - 
@@ -41,3 +42,20 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Below All
+    uniqueID: 2828504499
+    locked: 0
+  - name: Sea
+    uniqueID: 195500599
+    locked: 0
+  - name: Above Sea
+    uniqueID: 2297775539
+    locked: 0
+  - name: Above Islands
+    uniqueID: 3263080311
+    locked: 0
+  - name: Above All
+    uniqueID: 54162853
+    locked: 0
+  m_RenderingLayers:
+  - Default
