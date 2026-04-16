@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: e6a1219982d8a4b0da5640b0defab903
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 164807
+  packageName: 'FC Pirate Music Pack [Lite]'
+  packageVersion: 1.0
+  assetPath: Assets/FC Pirate Music Pack [Lite]/Scripts/MusicPlayer.cs
+  uploadId: 363694
