@@ -28,17 +28,17 @@ public class PlayerMovement : MonoBehaviour
             cannons[1].Shoot();
         }
 
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            PlayerData.currentHealth -= 15;
-            Debug.Log("Player new health: " + PlayerData.currentHealth);
-        }
+        //if (Input.GetKeyDown(KeyCode.F))
+        //{
+        //    PlayerData.currentHealth -= 15;
+        //    Debug.Log("Player new health: " + PlayerData.currentHealth);
+        //}
 
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            PlayerData.currentHealth += 15;
-            Debug.Log("Player new health: " + PlayerData.currentHealth);
-        }
+        //if (Input.GetKeyDown(KeyCode.G))
+        //{
+        //    PlayerData.currentHealth += 15;
+        //    Debug.Log("Player new health: " + PlayerData.currentHealth);
+        //}
     }
     void FixedUpdate()
     {

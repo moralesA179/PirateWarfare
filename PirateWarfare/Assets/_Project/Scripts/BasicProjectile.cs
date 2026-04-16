@@ -20,6 +20,7 @@ public class BasicProjectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("Lifetime: " + lifeTime);
         if (lifeTime > 0)
             lifeTime--;
         else
@@ -47,11 +48,14 @@ public class BasicProjectile : MonoBehaviour
         }
         else
         {
-            if (!collision.collider.CompareTag("Player"))
+            if (!collision.collider.CompareTag("Player") && !collision.collider.CompareTag("Projectile")) //this seems to work... (maybe idk anymore)
             {
+                Debug.Log("I collided with neither the player or another projectile!");
                 switch (type)
                 {
                     case ProjectileTypes.Base:
+                        Debug.Log("Insta kill executed");
+                        Debug.Log(collision.collider.tag);
                         lifeTime = 0; //immediately kill upon collision
                         break;
                     case ProjectileTypes.Richochet:

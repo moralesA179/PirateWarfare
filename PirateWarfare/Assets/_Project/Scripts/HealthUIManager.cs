@@ -1,19 +1,33 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class HealthUIManager : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public HeartIcon heart;
 
-    public Image heart;
-    private static HeartIcon[] hearts;
+    private static List<HeartIcon> hearts = new List<HeartIcon>();
     void Start()
     {
-        hearts = GetComponentsInChildren<HeartIcon>();
-        if(PlayerPrefs.GetInt("health") < PlayerData.maxHealth)
+        GetComponentsInChildren<HeartIcon>(hearts);
+        if(PlayerData.maxHealth > 100)
         {
-            UpdateHealthUI(PlayerData.maxHealth - PlayerPrefs.GetInt("health"), false);
+            for (int i = 0; i < ShopManager.healthLevelCounter - 1; i++)
+            {
+                hearts.Add(Instantiate(heart, transform));
+            }
         }
+        if(PlayerData.currentHealth < PlayerData.maxHealth)
+        {
+            Debug.Log($"{PlayerData.currentHealth} vs {PlayerPrefs.GetInt("health")}");
+            UpdateHealthUI(PlayerData.maxHealth - PlayerData.currentHealth, false);
+        }
+    }
+
+    public void LevelUpHealth()
+    {
+        hearts.Add(Instantiate(heart, transform));
     }
 
 
@@ -21,7 +35,10 @@ public class HealthUIManager : MonoBehaviour
     {
         if (!healing)
         {
-            for (int i = hearts.Length - 1; i >= 0; i--) //for each heart (working backwards right -> left)
+            Debug.Log("health diff: " + healthDiff);
+            Debug.Log("COUNT: " + hearts.Count);
+            Debug.Log("IS NULL: " + hearts[hearts.Count - 1] == null);
+            for (int i = hearts.Count - 1; i >= 0; i--) //for each heart (working backwards right -> left)
             {
                 if (healthDiff <= 0)
                     break;
@@ -36,7 +53,7 @@ public class HealthUIManager : MonoBehaviour
         }
         else
         {
-            for (int i = 0; i < hearts.Length; i++)
+            for (int i = 0; i < hearts.Count; i++)
             {
                 //Debug.Log(healthDiff);
                 if (healthDiff <= 0)

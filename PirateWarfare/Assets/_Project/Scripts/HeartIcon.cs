@@ -1,12 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
-
+[System.Serializable]
 public class HeartIcon : MonoBehaviour
 {
     public Sprite[] states;
     private Image uiImage;
     private int heartHealth = 20;
-    public void Start()
+    public void Awake()
     {
         uiImage = GetComponent<Image>();
     }
@@ -42,6 +42,7 @@ public class HeartIcon : MonoBehaviour
 
     public bool IsEmpty()
     {
+        Debug.Log($"In the heart code: {uiImage == null}");
         return uiImage.sprite == states[2];
     }
     public bool IsFull()
