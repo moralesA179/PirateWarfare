@@ -82,8 +82,11 @@ public class ShopManager : MonoBehaviour
                     PlayerData.CannonInventory.Add(cannonTypes.options[cannonTypes.value].text, cannonPrefabs[cannonTypes.value]); //buying it
                     PlayerData.score -= 100;
                     //Settting the equip buttons back on b/c they were disabled due to you not owning this
-                    equipLeft.interactable = true;
-                    equipRight.interactable = true;
+                    if (PlayerData.ProjectileInventory.ContainsKey(projectileTypes.options[projectileTypes.value].text)) //if the projectile currently selected is also owned
+                    {
+                        equipLeft.interactable = true;
+                        equipRight.interactable = true;
+                    }
                 } //else do nothing (you already have it, no need to do anything)
             }
             else
@@ -99,8 +102,11 @@ public class ShopManager : MonoBehaviour
                     PlayerData.ProjectileInventory.Add(projectileTypes.options[projectileTypes.value].text, projectilePrefabs[projectileTypes.value]); //buying it
                     PlayerData.score -= 100;
                     //Settting the equip buttons back on b/c they were disabled due to you not owning this
-                    equipLeft.interactable = true;
-                    equipRight.interactable = true;
+                    if (PlayerData.CannonInventory.ContainsKey(cannonTypes.options[cannonTypes.value].text)) //if the cannon currently selected is also owned
+                    {
+                        equipLeft.interactable = true;
+                        equipRight.interactable = true;
+                    }
                 } //else do nothing (you already have it, no need to do anythin
             }
             else
@@ -125,10 +131,13 @@ public class ShopManager : MonoBehaviour
                 equipLeft.interactable = false;
                 equipRight.interactable = false;
             }
-            else 
+            else
             {
-                equipLeft.interactable = true;
-                equipRight.interactable = true;
+                if(PlayerData.ProjectileInventory.ContainsKey(projectileTypes.options[projectileTypes.value].text)) //if the projectile currently selected is also owned
+                {
+                    equipLeft.interactable = true;
+                    equipRight.interactable = true;
+                }
             }
         });
 
@@ -140,8 +149,11 @@ public class ShopManager : MonoBehaviour
             }
             else
             {
-                equipLeft.interactable = true;
-                equipRight.interactable = true;
+                if (PlayerData.CannonInventory.ContainsKey(cannonTypes.options[cannonTypes.value].text)) //if the cannon currently selected is also owned
+                {
+                    equipLeft.interactable = true;
+                    equipRight.interactable = true;
+                }
             }
         });
 
