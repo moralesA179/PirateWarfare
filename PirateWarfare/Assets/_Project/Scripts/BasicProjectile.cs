@@ -12,23 +12,36 @@ public class BasicProjectile : MonoBehaviour
     public ProjectileTypes type;
     Rigidbody2D rb;
 
+    public MusicPlayer musicPlayer;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        musicPlayer = GetComponent<MusicPlayer>();
     }
 
     // Update is called once per frame
     void Update()
     {
         if (lifeTime > 0)
+        {
             lifeTime--;
-        else
+        }
+        else   
+        {
             Destroy(gameObject);
+        }
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(enemy)
+        if (!collision.collider.CompareTag("Player")) 
+        {
+            Debug.Log("collision detected");
+            musicPlayer.Damage();
+        }
+            if (enemy)
         {
             if(collision.collider.CompareTag("Player"))
             {
@@ -36,7 +49,7 @@ public class BasicProjectile : MonoBehaviour
                 switch(type)
                 {
                     case ProjectileTypes.Base:
-                        lifeTime = 0; //immediately kill upon collision with player
+                        Destroy(gameObject, 1.056f); //immediately kill upon collision with player
                         break;
                     case ProjectileTypes.Richochet:
                         rb.linearVelocity = -rb.linearVelocity;
@@ -49,10 +62,11 @@ public class BasicProjectile : MonoBehaviour
         {
             if (!collision.collider.CompareTag("Player"))
             {
+
                 switch (type)
                 {
                     case ProjectileTypes.Base:
-                        lifeTime = 0; //immediately kill upon collision
+                        Destroy(gameObject, 1.056f); //immediately kill upon collision
                         break;
                     case ProjectileTypes.Richochet:
                         rb.linearVelocity = -rb.linearVelocity;
