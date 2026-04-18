@@ -52,6 +52,21 @@ public class Cannon : MonoBehaviour
     {
         return (int)this.type;
     }
+
+    public static string GetCannonTypeStr(int type)
+    {
+        switch (type)
+        {
+            case 0:
+                return "Base";
+            case 1:
+                return "Shotgun";
+            case 2:
+                return "Burst";
+            default:
+                return "";
+        }
+    }
     public void Shoot()
     {
         BasicProjectile cannonBall; 

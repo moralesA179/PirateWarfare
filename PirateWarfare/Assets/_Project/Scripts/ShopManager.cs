@@ -8,13 +8,16 @@ public class ShopManager : MonoBehaviour
     //All the fields we need to keep track of and update in the shop...
     public Button levelUpHealth, levelUpSpeed, levelUpDamage, equipLeft, equipRight, buyCannon, buyBall, closeShop;
     public TMP_Dropdown cannonTypes, projectileTypes;
-    public TMP_Text healthLvText, speedLv, damageLv, statInfo, notEnoughScore;
+    public TMP_Text healthLvText, speedLv, damageLv, statInfo, notEnoughScore, buyCannonText, buyProjectileText;
     //Aesthetics, don't actually get stored in player data...
     public static int healthLevelCounter = 1, speedLevelCounter = 1, damageLevelCounter = 1;
     public HealthUIManager health;
     public Cannon[] cannonPrefabs;
     public BasicProjectile[] projectilePrefabs;
+    public int healthCost, speedCost, damageCost;
 
+    public int[] cannonCosts = { 0, 100, 150};
+    public int[] projectileCosts = { 0, 100, 300000000};
     private bool timerActive = false;
     private int timer = 0;
     public int max_time = 200;
@@ -24,14 +27,15 @@ public class ShopManager : MonoBehaviour
         //Level Health Up By 1
         levelUpHealth.onClick.AddListener(() =>
         {
-            if(EnoughScore(50))
+            if(EnoughScore(healthCost))
             {
                 PlayerData.maxHealth += 20;
                 PlayerData.Heal(PlayerData.maxHealth);
                 PlayerPrefs.SetInt("health", PlayerData.maxHealth);
                 health.LevelUpHealth();
                 healthLevelCounter++;
-                PlayerData.score -= 50;
+                PlayerData.score -= healthCost;
+                healthCost *= 2;
             }
             else
             {
@@ -42,11 +46,12 @@ public class ShopManager : MonoBehaviour
         //Level Speed Up By 1
         levelUpSpeed.onClick.AddListener(() =>
         {
-            if (EnoughScore(50))
+            if (EnoughScore(speedCost))
             {
                 PlayerData.speedMult += 0.5f;
                 speedLevelCounter++;
-                PlayerData.score -= 50;
+                PlayerData.score -= speedCost;
+                speedCost *= 2;
             } else
             {
                 timerActive = true;
@@ -56,11 +61,12 @@ public class ShopManager : MonoBehaviour
         //Level Damage Up By 1
         levelUpDamage.onClick.AddListener(() =>
         {
-            if(EnoughScore(50))
+            if(EnoughScore(damageCost))
             {
                 PlayerData.baseDamage += 5;
                 damageLevelCounter++;
-                PlayerData.score -= 50;
+                PlayerData.score -= damageCost;
+                damageCost *= 2;
             }
             else
             {
@@ -75,18 +81,19 @@ public class ShopManager : MonoBehaviour
 
         buyCannon.onClick.AddListener(() => 
         {
-            if (EnoughScore(100))
+            if (EnoughScore(cannonCosts[cannonTypes.value]))
             {
                 if(!PlayerData.CannonInventory.ContainsKey(cannonTypes.options[cannonTypes.value].text)) //if you dont already own the cannon
                 {
                     PlayerData.CannonInventory.Add(cannonTypes.options[cannonTypes.value].text, cannonPrefabs[cannonTypes.value]); //buying it
-                    PlayerData.score -= 100;
+                    PlayerData.score -= cannonCosts[cannonTypes.value];
                     //Settting the equip buttons back on b/c they were disabled due to you not owning this
                     if (PlayerData.ProjectileInventory.ContainsKey(projectileTypes.options[projectileTypes.value].text)) //if the projectile currently selected is also owned
                     {
                         equipLeft.interactable = true;
                         equipRight.interactable = true;
                     }
+                    buyCannonText.text = "OWNED";
                 } //else do nothing (you already have it, no need to do anything)
             }
             else
@@ -95,19 +102,20 @@ public class ShopManager : MonoBehaviour
 
         buyBall.onClick.AddListener(() =>
         {
-            if (EnoughScore(100))
+            if (EnoughScore(projectileCosts[projectileTypes.value]))
             {
                 if (!PlayerData.ProjectileInventory.ContainsKey(projectileTypes.options[projectileTypes.value].text)) //if you dont already own the cannon
                 {
                     PlayerData.ProjectileInventory.Add(projectileTypes.options[projectileTypes.value].text, projectilePrefabs[projectileTypes.value]); //buying it
-                    PlayerData.score -= 100;
+                    PlayerData.score -= projectileCosts[projectileTypes.value];
                     //Settting the equip buttons back on b/c they were disabled due to you not owning this
                     if (PlayerData.CannonInventory.ContainsKey(cannonTypes.options[cannonTypes.value].text)) //if the cannon currently selected is also owned
                     {
                         equipLeft.interactable = true;
                         equipRight.interactable = true;
                     }
-                } //else do nothing (you already have it, no need to do anythin
+                    buyProjectileText.text = "OWNED";
+                } //else do nothing (you already have it, no need to do anything)
             }
             else
                 timerActive = true;
@@ -121,7 +129,7 @@ public class ShopManager : MonoBehaviour
 
         equipRight.onClick.AddListener(() => {
             PlayerData.UpdateCannon(cannonTypes.options[cannonTypes.value].text, 1);
-            PlayerData.UpdateProjectile(projectileTypes.options[projectileTypes.value].text, 0);
+            PlayerData.UpdateProjectile(projectileTypes.options[projectileTypes.value].text, 1);
         });
 
         cannonTypes.onValueChanged.AddListener((i) => { 
@@ -130,10 +138,12 @@ public class ShopManager : MonoBehaviour
                 Debug.Log("Setting buttons to off");
                 equipLeft.interactable = false;
                 equipRight.interactable = false;
+                buyCannonText.text = $"BUY ({cannonCosts[i]})";
             }
             else
             {
-                if(PlayerData.ProjectileInventory.ContainsKey(projectileTypes.options[projectileTypes.value].text)) //if the projectile currently selected is also owned
+                buyCannonText.text = "OWNED";
+                if (PlayerData.ProjectileInventory.ContainsKey(projectileTypes.options[projectileTypes.value].text)) //if the projectile currently selected is also owned
                 {
                     equipLeft.interactable = true;
                     equipRight.interactable = true;
@@ -146,9 +156,11 @@ public class ShopManager : MonoBehaviour
             {
                 equipLeft.interactable = false;
                 equipRight.interactable = false;
+                buyProjectileText.text = $"BUY ({projectileCosts[i]})";
             }
             else
             {
+                buyProjectileText.text = "OWNED";
                 if (PlayerData.CannonInventory.ContainsKey(cannonTypes.options[cannonTypes.value].text)) //if the cannon currently selected is also owned
                 {
                     equipLeft.interactable = true;
@@ -174,10 +186,12 @@ public class ShopManager : MonoBehaviour
                 timer++;
             }
         }
-        statInfo.text = $"Health: {PlayerData.maxHealth} HP\nSpeed: {PlayerData.speedMult} m/s\nBase Damage: {PlayerData.baseDamage}\nSCORE: {PlayerData.score}";
-        healthLvText.text = $"Lv: {healthLevelCounter}";
-        speedLv.text = $"Lv: {speedLevelCounter}";
-        damageLv.text = $"Lv: {damageLevelCounter}";
+        statInfo.text = $"Health: {PlayerData.maxHealth} HP\nSpeed: {PlayerData.speedMult} m/s\nBase Damage: {PlayerData.baseDamage}\nSCORE: {PlayerData.score}\n" +
+            $"LEFT CANNON: {Cannon.GetCannonTypeStr(TempShopTester.currentTypes[0])} with ammo: {TempShopTester.currentProjectiles[0].GetProjectileTypeStr()}\n" +
+            $"RIGHT CANNON: {Cannon.GetCannonTypeStr(TempShopTester.currentTypes[1])} with ammo: {TempShopTester.currentProjectiles[1].GetProjectileTypeStr()}";
+        healthLvText.text = $"Lv: {healthLevelCounter} \nCost: {healthCost}";
+        speedLv.text = $"Lv: {speedLevelCounter} \nCost: {speedCost}";
+        damageLv.text = $"Lv: {damageLevelCounter} \nCost: {damageCost}";
         //Debug.Log(cannonTypes.options[0].text);
         notEnoughScore.enabled = timerActive;
 
