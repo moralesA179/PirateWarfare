@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 987ba4c3011c0a9498bad6b9a51b6e1c
+guid: 0eaf8309a5b54bf44ad580a81a600f59
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2168958808540731756
-    second: PremadeButtons_XRed_0
+      213: 6981375246426909818
+    second: 108988_0
+  - first:
+      213: 4419205845888464932
+    second: 108988_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +103,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PremadeButtons_XRed_0
+      name: 108988_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 266
-        height: 267
+        y: 172
+        width: 512
+        height: 298
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +118,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c6956837b80b91e10800000000000000
-      internalID: 2168958808540731756
+      spriteID: a7c2bf63cc3d2e060800000000000000
+      internalID: 6981375246426909818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 108988_1
+      rect:
+        serializedVersion: 2
+        x: 117
+        y: 42
+        width: 195
+        height: 195
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 428f2898d4c245d30800000000000000
+      internalID: 4419205845888464932
       vertices: []
       indices: 
       edges: []
@@ -135,7 +160,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      PremadeButtons_XRed_0: 2168958808540731756
+      108988_0: 6981375246426909818
+      108988_1: 4419205845888464932
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

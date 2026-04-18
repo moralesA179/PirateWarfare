@@ -42,6 +42,31 @@ public class Cannon : MonoBehaviour
         //Vector3 l = Quaternion.AngleAxis(30f, transform.forward.normalized) * transform.right;
         //Debug.DrawLine(transform.position, transform.position + l, Color.blue);
     }
+
+    public void SetCannonType(int type)
+    {
+        this.type = (CannonTypes) type;
+    }
+
+    public int GetCannonTypeInt()
+    {
+        return (int)this.type;
+    }
+
+    public static string GetCannonTypeStr(int type)
+    {
+        switch (type)
+        {
+            case 0:
+                return "Base";
+            case 1:
+                return "Shotgun";
+            case 2:
+                return "Burst";
+            default:
+                return "";
+        }
+    }
     public void Shoot()
     {
         BasicProjectile cannonBall; 
@@ -86,6 +111,7 @@ public class Cannon : MonoBehaviour
 
         void ShotgunShot()
         {
+            //int counter = 0; //debug
             int remainder = maxProjectileCount - 1; //number of bullets to be split on negative and positive quadrants (ex. 2 for 3 or 3 for 4) 
             float angleStep = 90 / remainder; // 45 for 2; for even bullet counts this angle step leads to there not being a straight shot bullet as it skips over 0 degs
             for(float i = -45f; i <= 45; i+= angleStep)
@@ -95,6 +121,7 @@ public class Cannon : MonoBehaviour
                 rb = cannonBall.GetComponent<Rigidbody2D>();
                 Vector3 rotatedVector = Quaternion.AngleAxis(i, transform.forward.normalized) * transform.right; //rotating 30 degrees around z axis
                 rb.linearVelocity = rotatedVector * projectileSpeed;
+                //Debug.Log("Iteration: " + counter++);
             }
         }
     }

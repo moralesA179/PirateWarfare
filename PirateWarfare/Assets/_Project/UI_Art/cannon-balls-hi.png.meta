@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 987ba4c3011c0a9498bad6b9a51b6e1c
+guid: bced534f7d59ad546bf3f351b4c4cb74
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2168958808540731756
-    second: PremadeButtons_XRed_0
+      213: -3988562122161888852
+    second: cannon-balls-hi_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PremadeButtons_XRed_0
+      name: cannon-balls-hi_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 266
-        height: 267
+        x: 1
+        y: 1
+        width: 598
+        height: 511
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c6956837b80b91e10800000000000000
-      internalID: 2168958808540731756
+      spriteID: ca166f7d1e7c5a8c0800000000000000
+      internalID: -3988562122161888852
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      PremadeButtons_XRed_0: 2168958808540731756
+      cannon-balls-hi_0: -3988562122161888852
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
