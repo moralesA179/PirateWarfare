@@ -1,6 +1,8 @@
+using System.Linq;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameUtilities : MonoBehaviour
@@ -13,7 +15,7 @@ public class GameUtilities : MonoBehaviour
     public int heal = 50;
 
 
-    public Button button, resumeButton, quitButton, healButton;
+    public Button button, resumeButton, saveButton,quitButton, healButton;
     public GameObject pauseMenu;
     public TMP_Text scoreText;
 
@@ -24,20 +26,20 @@ public class GameUtilities : MonoBehaviour
             button.onClick.AddListener(() => { PlayerData.TakeDamage(damage); });
         if(resumeButton != null)
             resumeButton.onClick.AddListener(() => { Time.timeScale = 1f; pauseMenu.SetActive(false); });
-        if (quitButton != null)
+        if (saveButton != null)
         {
-            quitButton.onClick.AddListener(() =>
+            saveButton.onClick.AddListener(() =>
             {
-                PlayerPrefs.SetInt("health", PlayerData.currentHealth);
-                PlayerPrefs.Save();
-                #if UNITY_EDITOR
-                EditorApplication.isPlaying = false;
-                #endif
-                Application.Quit();
+                string[] cannons = PlayerData.CannonInventory.Keys.Count != 0 ? PlayerData.CannonInventory.Keys.ToArray() : new string[] { "Base" };
+                string[] projectiles = PlayerData.ProjectileInventory.Keys.Count != 0 ? PlayerData.ProjectileInventory.Keys.ToArray() : new string[] { "Base" };
+                SaveManager.SaveGame(PlayerData.currentHealth, PlayerData.maxHealth, PlayerData.speedMult, PlayerData.baseDamage, PlayerData.score, cannons, projectiles);
             });
         }
-
-        if(healButton != null)
+        if (quitButton != null)
+            quitButton.onClick.AddListener(() => {
+                SceneManager.LoadScene("MainMenu");
+            });
+        if (healButton != null)
             healButton.onClick.AddListener(() => { PlayerData.Heal(heal); });
     }
 

@@ -14,7 +14,7 @@ public class ShopManager : MonoBehaviour
     public HealthUIManager health;
     public Cannon[] cannonPrefabs;
     public BasicProjectile[] projectilePrefabs;
-    public int healthCost, speedCost, damageCost;
+    public static int healthCost = 50, speedCost = 50, damageCost = 50;
 
     public int[] cannonCosts = { 0, 100, 150};
     public int[] projectileCosts = { 0, 100, 300000000};
@@ -31,7 +31,7 @@ public class ShopManager : MonoBehaviour
             {
                 PlayerData.maxHealth += 20;
                 PlayerData.Heal(PlayerData.maxHealth);
-                PlayerPrefs.SetInt("health", PlayerData.maxHealth);
+                PlayerPrefs.SetInt("cHealth", PlayerData.maxHealth);
                 health.LevelUpHealth();
                 healthLevelCounter++;
                 PlayerData.score -= healthCost;
@@ -187,8 +187,8 @@ public class ShopManager : MonoBehaviour
             }
         }
         statInfo.text = $"Health: {PlayerData.maxHealth} HP\nSpeed: {PlayerData.speedMult} m/s\nBase Damage: {PlayerData.baseDamage}\nSCORE: {PlayerData.score}\n" +
-            $"LEFT CANNON: {Cannon.GetCannonTypeStr(TempShopTester.currentTypes[0])} with ammo: {TempShopTester.currentProjectiles[0].GetProjectileTypeStr()}\n" +
-            $"RIGHT CANNON: {Cannon.GetCannonTypeStr(TempShopTester.currentTypes[1])} with ammo: {TempShopTester.currentProjectiles[1].GetProjectileTypeStr()}";
+            $"LEFT CANNON: {Cannon.GetCannonTypeStr(SaveManager.currentTypes[0])} with ammo: {SaveManager.currentProjectiles[0].GetProjectileTypeStr()}\n" +
+            $"RIGHT CANNON: {Cannon.GetCannonTypeStr(SaveManager.currentTypes[1])} with ammo: {SaveManager.currentProjectiles[1].GetProjectileTypeStr()}";
         healthLvText.text = $"Lv: {healthLevelCounter} \nCost: {healthCost}";
         speedLv.text = $"Lv: {speedLevelCounter} \nCost: {speedCost}";
         damageLv.text = $"Lv: {damageLevelCounter} \nCost: {damageCost}";

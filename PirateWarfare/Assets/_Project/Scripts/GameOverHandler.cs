@@ -14,13 +14,8 @@ public class GameOverHandler : MonoBehaviour
             SceneManager.LoadScene("World Map");
         });
 
-        quitButton.onClick.AddListener(() => {
-            PlayerPrefs.SetInt("health", PlayerData.maxHealth);
-            PlayerPrefs.Save();
-            #if UNITY_EDITOR
-            EditorApplication.isPlaying = false;
-            #endif
-            Application.Quit();
+        quitButton.onClick.AddListener(() => { //quitting game should no longer save (punishment for death is losing progress!) 
+            SceneManager.LoadScene("MainMenu");
         });
     }
 }

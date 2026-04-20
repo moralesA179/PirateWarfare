@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -25,39 +26,39 @@ public class PlayerData : MonoBehaviour
     private void Awake()
     {
         cannons = GetComponentsInChildren<Cannon>();
-        if (TempShopTester.currentTypes.Count > 0) //first run
+        if (SaveManager.currentTypes.Count > 0) //first run
         {
             for (int i = 0; i < cannons.Length; i++)
             {
-                cannons[i].SetCannonType(TempShopTester.currentTypes[i]);
+                cannons[i].SetCannonType(SaveManager.currentTypes[i]);
             }
         }
         else
         {
             foreach(Cannon cannon in cannons)
             {
-                TempShopTester.currentTypes.Add(cannon.GetCannonTypeInt());
+                SaveManager.currentTypes.Add(cannon.GetCannonTypeInt());
                 CannonInventory.TryAdd("Base", cannon); //Base never gets added since its never bought
             }
         }
 
-        if(TempShopTester.currentProjectiles.Count > 0)
+        if(SaveManager.currentProjectiles.Count > 0)
         {
             for (int i = 0; i < cannons.Length; i++)
             {
-                cannons[i].projectile = TempShopTester.currentProjectiles[i];
+                cannons[i].projectile = SaveManager.currentProjectiles[i];
             }
         }
         else
         {
             foreach (Cannon cannon in cannons)
             {
-                TempShopTester.currentProjectiles.Add(cannon.projectile);
+                SaveManager.currentProjectiles.Add(cannon.projectile);
                 ProjectileInventory.TryAdd("Base", cannon.projectile); //Base never gets added since its never bought
             }
         }
             animator = GetComponent<Animator>();
-        currentHealth = PlayerPrefs.GetInt("health", maxHealth); //when loading into the game either start with previous health or the maximum starting health (100)
+        
     }
 
     private void Update()
@@ -76,7 +77,7 @@ public class PlayerData : MonoBehaviour
             animator.SetInteger("HealthState", (int)HealthState.Full);
         }
 
-        Debug.Log(currentHealth);
+        Debug.Log(string.Join(",", CannonInventory.Keys.ToArray()));
 
     }
 
@@ -107,7 +108,7 @@ public class PlayerData : MonoBehaviour
         {
             cannons[cannonToUpgrade].type = CannonInventory[type].type;
             Debug.Log($"HELLO WORLD: {CannonInventory[type].type}; is-present: {CannonInventory.ContainsKey(type)}");
-            TempShopTester.currentTypes[cannonToUpgrade] = CannonInventory[type].GetCannonTypeInt();
+            SaveManager.currentTypes[cannonToUpgrade] = CannonInventory[type].GetCannonTypeInt();
             return true;
         } else
         {  
@@ -120,7 +121,7 @@ public class PlayerData : MonoBehaviour
         if (ProjectileInventory.ContainsKey(type))
         {
             cannons[cannonToUpgrade].projectile = ProjectileInventory[type];
-            TempShopTester.currentProjectiles[cannonToUpgrade] = ProjectileInventory[type];
+            SaveManager.currentProjectiles[cannonToUpgrade] = ProjectileInventory[type];
             return true;
         }
         return false;
