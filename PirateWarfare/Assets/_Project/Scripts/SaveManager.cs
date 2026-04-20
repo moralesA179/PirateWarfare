@@ -51,9 +51,6 @@ public class SaveManager : MonoBehaviour
 
     public static void ResetGame()
     {
-        //Default vals
-        SaveGame(100, 100, 1, 5, 0, new string[] { "Base" }, new string[] {"Base"}, true);
-
         //resetting shop
         ShopManager.healthCost = 50;
         ShopManager.speedCost = 50;
@@ -62,7 +59,16 @@ public class SaveManager : MonoBehaviour
         ShopManager.speedLevelCounter = 1;
         ShopManager.damageLevelCounter = 1;
 
-        
+        //Empty the inventories
+        PlayerData.CannonInventory.Clear();
+        PlayerData.ProjectileInventory.Clear();
+
+        //Empty the currents?
+        currentTypes.Clear();
+        currentProjectiles.Clear();
+
+        //Default vals
+        SaveGame(100, 100, 1, 5, 0, new string[] { "Base" }, new string[] {"Base"}, true);
 
     }
 
@@ -86,6 +92,7 @@ public class SaveManager : MonoBehaviour
             {
                 if(PlayerPrefs.HasKey($"cannon{i}"))
                 {
+                    Debug.Log($"Deleting: cannon{i} w/ value: {PlayerPrefs.GetString($"cannon{i}")}");
                     PlayerPrefs.DeleteKey($"cannon{i}");
                 }
             }
@@ -138,13 +145,12 @@ public class SaveManager : MonoBehaviour
         PlayerData.baseDamage = PlayerPrefs.GetInt("damage", 5);
         PlayerData.score = PlayerPrefs.GetInt("score", 0);
 
-        ShopManager.healthLevelCounter = PlayerPrefs.GetInt("healthLevel", 1);
-
         //Inventory
         for(int i = 0; i < 3; i++) //3 b.c there only 3 cannons in the game...
         {
             if(PlayerPrefs.HasKey($"cannon{i}")) //if this was present
             {
+                Debug.Log($"Adding: cannon{i} w/ value: {PlayerPrefs.GetString($"cannon{i}")}");
                 PlayerData.CannonInventory.TryAdd(PlayerPrefs.GetString($"cannon{i}"), availableCannons[GetRightCannon(PlayerPrefs.GetString($"cannon{i}"))]);
             }
         }
@@ -159,7 +165,9 @@ public class SaveManager : MonoBehaviour
 
         //current loadout
         //loading current cannons (integers signify type of cannon to be loaded)
+        
         currentTypes.Add(PlayerPrefs.GetInt("leftCannon", 0));
+        Debug.Log("Left Cannon Type Upon Loading the game: " + PlayerPrefs.GetInt("leftCannon", 0));
         currentTypes.Add(PlayerPrefs.GetInt("rightCannon", 0));
 
         //current projectiles as strings

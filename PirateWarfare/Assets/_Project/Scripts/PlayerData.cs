@@ -30,6 +30,7 @@ public class PlayerData : MonoBehaviour
         {
             for (int i = 0; i < cannons.Length; i++)
             {
+                Debug.Log("current types: " + SaveManager.currentTypes[i]);
                 cannons[i].SetCannonType(SaveManager.currentTypes[i]);
             }
         }
