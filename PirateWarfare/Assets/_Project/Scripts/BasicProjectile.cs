@@ -16,9 +16,12 @@ public class BasicProjectile : MonoBehaviour
     public ProjectileTypes type;
     Rigidbody2D rb;
 
+    public MusicPlayer musicPlayer;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        musicPlayer = GetComponent<MusicPlayer>();
     }
 
     // Update is called once per frame
@@ -26,33 +29,24 @@ public class BasicProjectile : MonoBehaviour
     {
         Debug.Log("Lifetime: " + lifeTime);
         if (lifeTime > 0)
-            lifeTime--;
-        else
-            Destroy(gameObject);
-
-        if (type == ProjectileTypes.Homing) //homing projectiles need to continously update their linear velocity to go in direction of the enemy...
         {
-            Collider2D hit = Physics2D.OverlapCircle(transform.position, homingRadius);
-            if (hit != null)
-            {
-                if (hit.CompareTag("Enemy")) //if the enemy was in our detection radius
-                {
-                    Debug.Log("Should home in...");
-                    //rb.linearVelocity = Vector3.RotateTowards(rb.linearVelocity.normalized, (hit.transform.position - transform.position).normalized, 0.1f, 0.0f).normalized * 4f;
-                    //Lerp more the farther you are from target...
-                    rb.linearVelocity = 4f * Vector3.Lerp(rb.linearVelocity.normalized, (hit.transform.position - transform.position).normalized,  counter * Time.deltaTime).normalized;
-                    Debug.DrawLine(transform.position, transform.position + (hit.transform.position - transform.position).normalized, Color.red);
-                    Debug.DrawLine(transform.position, transform.position + (Vector3)rb.linearVelocity.normalized, Color.green);
-                    counter += homingStrength;
-                }
-            }
-            Debug.Log($"Linear Velocity Magnitude: {rb.linearVelocity.magnitude}");
+            lifeTime--;
         }
+        else   
+        {
+            Destroy(gameObject);
+        }
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(enemy)
+        if (!collision.collider.CompareTag("Player")) 
+        {
+            Debug.Log("collision detected");
+            musicPlayer.Damage();
+        }
+            if (enemy)
         {
             if(collision.collider.CompareTag("Player"))
             {
@@ -60,7 +54,7 @@ public class BasicProjectile : MonoBehaviour
                 switch(type)
                 {
                     case ProjectileTypes.Base:
-                        lifeTime = 0; //immediately kill upon collision with player
+                        Destroy(gameObject, 1.056f); //immediately kill upon collision with player
                         break;
                     case ProjectileTypes.Richochet:
                         rb.linearVelocity = -rb.linearVelocity;
@@ -73,14 +67,11 @@ public class BasicProjectile : MonoBehaviour
         {
             if (!collision.collider.CompareTag("Player") && !collision.collider.CompareTag("Projectile")) //this seems to work... (maybe idk anymore)
             {
-                Debug.Log("I collided with neither the player or another projectile!");
+
                 switch (type)
                 {
                     case ProjectileTypes.Base:
-                    case ProjectileTypes.Homing:
-                        Debug.Log("Insta kill executed");
-                        Debug.Log(collision.collider.tag);
-                        lifeTime = 0; //immediately kill upon collision
+                        Destroy(gameObject, 1.056f); //immediately kill upon collision
                         break;
                     case ProjectileTypes.Richochet:
                         rb.linearVelocity = -rb.linearVelocity;
