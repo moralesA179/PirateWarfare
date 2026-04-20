@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -45,6 +46,18 @@ public class PlayerMovement : MonoBehaviour
         //    PlayerData.currentHealth += 15;
         //    Debug.Log("Player new health: " + PlayerData.currentHealth);
         //}
+
+        //debug stuff
+        if (Input.GetKeyUp(KeyCode.G))
+        {
+            SceneManager.LoadScene("Shop&Items");
+
+        }
+
+        if (Input.GetKeyUp(KeyCode.B))
+        {
+            PlayerData.score += 100;
+        }
     }
     void FixedUpdate()
     {
