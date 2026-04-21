@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8353627621989462522}
   m_Layer: 0
   m_Name: Propeller
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4918,7 +4918,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 54162853
   m_SortingLayer: 5
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 8801494585396759129, guid: f0d1955ad32ac2c4da0578ddf36a454c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -5266,8 +5266,20 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 2049897696556236992, guid: 4554b7e62b1988a40b0e05a5154f497c, type: 3}
+      propertyPath: type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2049897696556236992, guid: 4554b7e62b1988a40b0e05a5154f497c, type: 3}
+      propertyPath: projectile
+      value: 
+      objectReference: {fileID: 7860781618485091648, guid: a316a7edb534b68498d7bd90a2e56239, type: 3}
+    - target: {fileID: 2049897696556236992, guid: 4554b7e62b1988a40b0e05a5154f497c, type: 3}
       propertyPath: projectileSpeed
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2049897696556236992, guid: 4554b7e62b1988a40b0e05a5154f497c, type: 3}
+      propertyPath: maxProjectileCount
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2317039443157443082, guid: 4554b7e62b1988a40b0e05a5154f497c, type: 3}
       propertyPath: m_SortingLayer
