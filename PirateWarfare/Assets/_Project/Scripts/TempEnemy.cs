@@ -13,6 +13,10 @@ public class Enemy : MonoBehaviour
     int currentHealth = 100;
     Animator animator;
 
+    public GameObject scrapPrefab;
+    [Range(0f, 1f)] public float dropChance = 0.3f;
+
+    private bool isDead = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -23,9 +27,13 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if (isDead) return;
+
         if (currentHealth <= 0)
         {
             currentHealth = 0;
+            isDead = true;
+            TryDropScrap();
             Destroy(gameObject);
         }
 
@@ -50,5 +58,18 @@ public class Enemy : MonoBehaviour
 
         Debug.Log(currentHealth);
 
+    }
+
+    void TryDropScrap()
+    {
+        if (scrapPrefab != null && Random.value <= dropChance)
+        {
+            Instantiate(scrapPrefab, transform.position, Quaternion.identity);
+        }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
     }
 }
