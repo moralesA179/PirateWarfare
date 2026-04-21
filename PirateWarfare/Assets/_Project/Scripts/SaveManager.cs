@@ -68,19 +68,19 @@ public class SaveManager : MonoBehaviour
         currentProjectiles.Clear();
 
         //Default vals
-        SaveGame(100, 100, 1, 5, 0, new string[] { "Base" }, new string[] {"Base"}, true);
+        SaveGame(100, 100, 1, 5, 0, new string[] { "Base" }, new string[] {"Base"}, true, 0);
 
     }
 
-    public static void SaveGame(int currentHealth, int maxHealth, float speed, int damage, int score, string[] cannons, string[] projectiles, bool reset=false)
+    public static void SaveGame(int currentHealth, int maxHealth, float speed, int damage, int score, string[] cannons, string[] projectiles, bool reset=false, int levelsComplete=0)
     {
-
         //Basic Stats
         PlayerPrefs.SetInt("cHealth", currentHealth);
         PlayerPrefs.SetInt("mHealth", maxHealth);
         PlayerPrefs.SetFloat("speed", speed);
         PlayerPrefs.SetInt("damage", damage);
         PlayerPrefs.SetInt("score", score);
+        PlayerPrefs.SetInt("levelsComplete", levelsComplete);
 
         //Inventory
         int counter = 0;
@@ -144,9 +144,11 @@ public class SaveManager : MonoBehaviour
         PlayerData.speedMult = PlayerPrefs.GetFloat("speed", 1f);
         PlayerData.baseDamage = PlayerPrefs.GetInt("damage", 5);
         PlayerData.score = PlayerPrefs.GetInt("score", 0);
+        PlayerData.levelsComplete = PlayerPrefs.GetInt("levelsComplete", 0);
+
 
         //Inventory
-        for(int i = 0; i < 3; i++) //3 b.c there only 3 cannons in the game...
+        for (int i = 0; i < 3; i++) //3 b.c there only 3 cannons in the game...
         {
             if(PlayerPrefs.HasKey($"cannon{i}")) //if this was present
             {

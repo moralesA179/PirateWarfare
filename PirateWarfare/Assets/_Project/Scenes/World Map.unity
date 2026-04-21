@@ -4848,6 +4848,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: Level 3
+  level: 3
 --- !u!61 &625279703
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4940,6 +4941,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: Level 3
+  level: 3
 --- !u!61 &636431560
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5080,6 +5082,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: Level 3
+  level: 3
 --- !u!61 &820101315
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6093,6 +6096,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: Level 2
+  level: 2
 --- !u!61 &1683868644
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6800,6 +6804,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: Level 1
+  level: 1
 --- !u!61 &2100966090
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -32,7 +32,7 @@ public class GameUtilities : MonoBehaviour
             {
                 string[] cannons = PlayerData.CannonInventory.Keys.Count != 0 ? PlayerData.CannonInventory.Keys.ToArray() : new string[] { "Base" };
                 string[] projectiles = PlayerData.ProjectileInventory.Keys.Count != 0 ? PlayerData.ProjectileInventory.Keys.ToArray() : new string[] { "Base" };
-                SaveManager.SaveGame(PlayerData.currentHealth, PlayerData.maxHealth, PlayerData.speedMult, PlayerData.baseDamage, PlayerData.score, cannons, projectiles);
+                SaveManager.SaveGame(PlayerData.currentHealth, PlayerData.maxHealth, PlayerData.speedMult, PlayerData.baseDamage, PlayerData.score, cannons, projectiles, false, PlayerData.levelsComplete);
             });
         }
         if (quitButton != null)

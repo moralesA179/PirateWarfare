@@ -12,6 +12,8 @@ public class PlayerData : MonoBehaviour
         Low = 2
     }
 
+    [Range(0, 4)]
+    public static int levelsComplete = 0;
     public static int maxHealth = 100, currentHealth, score = 0;
     public static float speedMult = 1f;
     public static int baseDamage = 5;
