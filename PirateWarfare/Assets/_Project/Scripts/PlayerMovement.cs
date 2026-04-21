@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -10,21 +11,52 @@ public class PlayerMovement : MonoBehaviour
     Cannon[] cannons;
     //Testing movement...
     Vector2 movementDir = Vector2.zero;
+
+    MusicPlayer musicPlayer;
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         cannons = GetComponentsInChildren<Cannon>();
+        musicPlayer = GetComponent<MusicPlayer>();
     }
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0)) //left click
+        if (Input.GetMouseButtonDown(0) && !cannons[0].reloading) //left click
         {
             cannons[0].Shoot();
+            musicPlayer.Shoot();
         }
 
-        if (Input.GetMouseButtonDown(1)) //right click
+        if (Input.GetMouseButtonDown(1) && !cannons[0].reloading) //right click
         {
             cannons[1].Shoot();
+            musicPlayer.Shoot();
+        }
+
+        //if (Input.GetKeyDown(KeyCode.F))
+        //{
+        //    PlayerData.currentHealth -= 15;
+        //    Debug.Log("Player new health: " + PlayerData.currentHealth);
+        //}
+
+        //if (Input.GetKeyDown(KeyCode.G))
+        //{
+        //    PlayerData.currentHealth += 15;
+        //    Debug.Log("Player new health: " + PlayerData.currentHealth);
+        //}
+
+        //debug stuff
+        if (Input.GetKeyUp(KeyCode.G))
+        {
+            SceneManager.LoadScene("Shop&Items");
+
+        }
+
+        if (Input.GetKeyUp(KeyCode.B))
+        {
+            PlayerData.score += 100;
         }
     }
     void FixedUpdate()
