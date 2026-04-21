@@ -82,6 +82,8 @@ public class BasicProjectile : MonoBehaviour
             if (!collision.collider.CompareTag("Player") && !collision.collider.CompareTag("Projectile")) //this seems to work... (maybe idk anymore)
             {
                 Debug.Log("I collided with neither the player or another projectile!");
+                if (collision.collider.CompareTag("Enemy"))
+                    collision.collider.GetComponent<Enemy>().TakeDamage(PlayerData.baseDamage);
                 switch (type)
                 {
                     case ProjectileTypes.Base:

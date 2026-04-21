@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -14,6 +15,7 @@ public class Enemy : MonoBehaviour
     Animator animator;
 
     public GameObject scrapPrefab;
+    public TextMeshPro damageNum;
     [Range(0f, 1f)] public float dropChance = 0.3f;
 
     private bool isDead = false;
@@ -33,7 +35,7 @@ public class Enemy : MonoBehaviour
         {
             currentHealth = 0;
             isDead = true;
-            TryDropScrap();
+            //TryDropScrap(); <-- We can try to edit this later...
             Destroy(gameObject);
         }
 
@@ -56,7 +58,7 @@ public class Enemy : MonoBehaviour
             animator.SetInteger("HealthState", (int)HealthState.Full);
         }
 
-        Debug.Log(currentHealth);
+        Debug.Log("Enemy Current Health: " + currentHealth);
 
     }
 
@@ -71,5 +73,10 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
+        Vector3 offset = new Vector3(Random.Range(0f, 1f), 0, 0);
+        Quaternion randomRotation = Quaternion.Euler(new Vector3(0, 0, Random.Range(-30f, 30f)));
+        TextMeshPro element = Instantiate(damageNum, transform.position + offset, randomRotation);
+        element.text = damage.ToString();
+        
     }
 }
