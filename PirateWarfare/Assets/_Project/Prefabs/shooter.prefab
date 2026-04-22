@@ -101,13 +101,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectile: {fileID: 6094743184788806419, guid: a316a7edb534b68498d7bd90a2e56239, type: 3}
-  reloading: 0
-  projectileSpeed: 4
-  enemy: 0
-  type: 0
-  maxProjectileCount: 3
-  bonusProjectileCount: 0
-  projectileBoostTimer: 0
   targetDelay: 320
 --- !u!1 &5709051032551407934
 GameObject:
@@ -210,13 +203,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectile: {fileID: 6094743184788806419, guid: a316a7edb534b68498d7bd90a2e56239, type: 3}
-  reloading: 0
-  projectileSpeed: 4
-  enemy: 0
-  type: 0
-  maxProjectileCount: 3
-  bonusProjectileCount: 0
-  projectileBoostTimer: 0
   targetDelay: 320
 --- !u!1 &7051639211851235581
 GameObject:
@@ -327,8 +313,6 @@ MonoBehaviour:
   player: {fileID: 0}
   orbitRadius: 5
   orbitSpeed: 1
-  rotationSpeed: 5
-  buffer: 2
 --- !u!195 &5205598513088813460
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -424,9 +408,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7051639211851235581}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2dc364c9144c9f14cb3be2caa9787b21, type: 3}
+  m_Script: {fileID: 11500000, guid: 45638b26e77e04aba9e7d96a052f0030, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrapPrefab: {fileID: 0}
-  damageNum: {fileID: 4535555547566147689, guid: 1562fcffa25f323408ac1f170c30cf54, type: 3}
-  dropChance: 0.3
+  t: {fileID: 698251863375315997}
