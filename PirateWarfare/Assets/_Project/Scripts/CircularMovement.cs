@@ -1,11 +1,18 @@
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEngine.GraphicsBuffer;
 
 public class CircularMovement : MonoBehaviour
 {
     public Transform player;
     public float orbitRadius = 10f;     // distance from player
-    public float orbitSpeed = 1f;       // how fast it circles
+    public float orbitSpeed = .5f;       // how fast it circles
+    public float rotationSpeed = 5.0f;  
+    public float buffer = 2f;
+    private bool isRevolving = false;
+    private bool isBuffered = false;
+    private float playerDistance;
+    
 
     private NavMeshAgent agent;
     private float angle;
@@ -21,6 +28,24 @@ public class CircularMovement : MonoBehaviour
     {
         if (player == null) return;
 
+        playerDistance = Vector2.Distance(transform.position, player.position);
+
+        //if (playerDistance > orbitRadius && !isBuffered)
+        //{
+            // 1. Calculate the direction vector
+            Vector2 direction = player.position - transform.position;
+
+            // 2. Find the angle in degrees
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+            // 3. Create the target rotation
+            Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
+
+            // 4. Smoothly rotate toward the target rotation
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+
+        //}
+
         // Increase angle over time
         angle += orbitSpeed * Time.deltaTime;
 
@@ -34,14 +59,6 @@ public class CircularMovement : MonoBehaviour
             player.position.z
         );
 
-        agent.SetDestination(orbitPosition);
-
-        // Optional: face the player while circling (like ships do 👀)
-        Vector3 direction = (player.position - transform.position).normalized;
-        if (direction != Vector3.zero)
-        {
-            float rotationZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(0, 0, rotationZ);
-        }
+        agent.SetDestination(player.position);
     }
 }
