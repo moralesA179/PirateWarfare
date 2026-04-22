@@ -1,21 +1,24 @@
 using UnityEngine;
 using UnityEngine.AI;
-using static UnityEngine.GraphicsBuffer;
 
 public class CircularMovement : MonoBehaviour
 {
     public Transform player;
-    public float orbitRadius = 10f;     // distance from player
-    public float orbitSpeed = .5f;       // how fast it circles
-    public float rotationSpeed = 5.0f;  
-    public float buffer = 2f;
-    private bool isRevolving = false;
-    private bool isBuffered = false;
-    private float playerDistance;
-    
+    public Cannon shipCannon;
+
+    [Header("Distance Zones")]
+    public float farRange = 10f;   // Outside this = chase
+    public float shortRange = 5f;  // Inside this = stop and aim
+
+    [Header("Speeds")]
+    public float orbitSpeed = 1f;
+    public float rotationSpeed = 360f;
+
+    [Header("Sprite Rotation Offsets")]
+    public float forwardOffset = 90f;    // Offset to make the front face the player
+    public float broadsideOffset = 0f;   // Offset to make the side face the player (try 0f or 180f depending on your sprite)
 
     private NavMeshAgent agent;
-    private float angle;
 
     void Start()
     {
@@ -28,37 +31,45 @@ public class CircularMovement : MonoBehaviour
     {
         if (player == null) return;
 
-        playerDistance = Vector2.Distance(transform.position, player.position);
+        float distance = Vector2.Distance(transform.position, player.position);
 
-        //if (playerDistance > orbitRadius && !isBuffered)
-        //{
-            // 1. Calculate the direction vector
-            Vector2 direction = player.position - transform.position;
+        // 1. SHORT RANGE: Stand still, broadside (sideways) to player
+        if (distance <= shortRange)
+        {
+            agent.isStopped = true;
+            RotateTowards(player.position, broadsideOffset);
+        }
+        // 2. MID RANGE: Revolve around the player, broadside (sideways) to player
+        else if (distance <= farRange)
+        {
+            agent.isStopped = false;
 
-            // 2. Find the angle in degrees
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            Vector2 dir = transform.position - player.position;
+            float currentAngle = Mathf.Atan2(dir.y, dir.x);
 
-            // 3. Create the target rotation
-            Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
+            float targetAngle = currentAngle + orbitSpeed;
 
-            // 4. Smoothly rotate toward the target rotation
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            float x = Mathf.Cos(targetAngle) * distance;
+            float y = Mathf.Sin(targetAngle) * distance;
+            Vector3 orbitPos = new Vector3(player.position.x + x, player.position.y + y, transform.position.z);
 
-        //}
+            agent.SetDestination(orbitPos);
+            RotateTowards(player.position, broadsideOffset);
+        }
+        // 3. FAR RANGE: Sail straight towards the player (front facing)
+        else
+        {
+            agent.isStopped = false;
+            agent.SetDestination(player.position);
+            RotateTowards(player.position, forwardOffset);
+        }
+    }
 
-        // Increase angle over time
-        angle += orbitSpeed * Time.deltaTime;
-
-        // Calculate circular position around player
-        float x = Mathf.Cos(angle) * orbitRadius;
-        float y = Mathf.Sin(angle) * orbitRadius;
-
-        Vector3 orbitPosition = new Vector3(
-            player.position.x + x,
-            player.position.y + y,
-            player.position.z
-        );
-
-        agent.SetDestination(player.position);
+    void RotateTowards(Vector3 target, float angleOffset)
+    {
+        Vector2 direction = target - transform.position;
+        // Replaced the buggy '+ rotationSpeed' with the dynamic angleOffset
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + angleOffset;
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, angle), rotationSpeed * Time.deltaTime);
     }
 }

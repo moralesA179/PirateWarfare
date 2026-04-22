@@ -99,12 +99,15 @@ public class Cannon : MonoBehaviour
     {
         BasicProjectile cannonBall;
         Rigidbody2D rb;
+        Collider2D shipCollider = GetComponentInParent<Collider2D>(); // Added collider reference
+
         if (projectile != null && !reloading && burstDone) //if bullet exists and your arent currently reloading
         {
             switch (type)
             {
                 case CannonTypes.Base:
                     cannonBall = Instantiate(projectile, transform.position, Quaternion.identity);
+                    if (shipCollider != null) Physics2D.IgnoreCollision(cannonBall.GetComponent<Collider2D>(), shipCollider); // Ignored collision
                     cannonBall.enemy = enemy;
                     rb = cannonBall.GetComponent<Rigidbody2D>();
                     rb.linearVelocity = transform.right * projectileSpeed;
@@ -129,9 +132,10 @@ public class Cannon : MonoBehaviour
 
             int projectileCount = GetCurrentProjectileCount();
 
-            for (int i = 0; i < maxProjectileCount; i++)
+            for (int i = 0; i < projectileCount; i++) // Fixed: Used projectileCount to allow powerups to work
             {
                 cannonBall = Instantiate(projectile, transform.position, Quaternion.identity);
+                if (shipCollider != null) Physics2D.IgnoreCollision(cannonBall.GetComponent<Collider2D>(), shipCollider); // Ignored collision
                 cannonBall.enemy = enemy;
                 rb = cannonBall.GetComponent<Rigidbody2D>();
                 rb.linearVelocity = transform.right * projectileSpeed;
@@ -147,6 +151,7 @@ public class Cannon : MonoBehaviour
             if (projectileCount <= 1)
             {
                 cannonBall = Instantiate(projectile, transform.position, Quaternion.identity);
+                if (shipCollider != null) Physics2D.IgnoreCollision(cannonBall.GetComponent<Collider2D>(), shipCollider); // Ignored collision
                 cannonBall.enemy = enemy;
                 rb = cannonBall.GetComponent<Rigidbody2D>();
                 rb.linearVelocity = transform.right * projectileSpeed;
@@ -154,11 +159,12 @@ public class Cannon : MonoBehaviour
             }
 
             //int counter = 0; //debug
-            int remainder = maxProjectileCount - 1; //number of bullets to be split on negative and positive quadrants (ex. 2 for 3 or 3 for 4) 
-            float angleStep = 90 / remainder; // 45 for 2; for even bullet counts this angle step leads to there not being a straight shot bullet as it skips over 0 degs
+            int remainder = projectileCount - 1; // Fixed: Used projectileCount to allow powerups to work
+            float angleStep = 90f / remainder; // 45 for 2; for even bullet counts this angle step leads to there not being a straight shot bullet as it skips over 0 degs
             for (float i = -45f; i <= 45; i += angleStep)
             {
                 cannonBall = Instantiate(projectile, transform.position, Quaternion.identity);
+                if (shipCollider != null) Physics2D.IgnoreCollision(cannonBall.GetComponent<Collider2D>(), shipCollider); // Ignored collision
                 cannonBall.enemy = enemy;
                 rb = cannonBall.GetComponent<Rigidbody2D>();
                 Vector3 rotatedVector = Quaternion.AngleAxis(i, transform.forward.normalized) * transform.right; //rotating 30 degrees around z axis

@@ -129,4 +129,13 @@ public class PlayerData : MonoBehaviour
         }
         return false;
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Colliding with any ships is a guarentee 10 damage
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            TakeDamage(10);
+        }
+    }
 }
