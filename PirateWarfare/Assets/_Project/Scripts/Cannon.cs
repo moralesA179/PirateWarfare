@@ -10,11 +10,15 @@ public class Cannon : MonoBehaviour
     private bool burstDone = true;
     public float projectileSpeed = 4.0f;
     public bool enemy = false; //used to determine what type of projectile to shoot (friendly or not)
-    public enum CannonTypes {Base, Shotgun, Burst};
+    public enum CannonTypes { Base, Shotgun, Burst };
     public CannonTypes type;
     [Range(3, 10)]
     [Tooltip("Number of projectiles per shot")]
-    public int maxProjectileCount = 3; 
+    public int maxProjectileCount = 3;
+
+    [Header("Temporary Projectile Boost")]
+    public int bonusProjectileCount = 0;
+    public float projectileBoostTimer = 0f;
 
     //timer to prevent spam
     private int currentDelay = 0;
@@ -41,11 +45,23 @@ public class Cannon : MonoBehaviour
         //Debug.DrawLine(transform.position, transform.position + (-transform.up + transform.right));
         //Vector3 l = Quaternion.AngleAxis(30f, transform.forward.normalized) * transform.right;
         //Debug.DrawLine(transform.position, transform.position + l, Color.blue);
+
+        //Count down temporary projectile boost
+        if (projectileBoostTimer > 0f)
+        {
+            projectileBoostTimer -= Time.deltaTime;
+
+            if (projectileBoostTimer <= 0f)
+            {
+                projectileBoostTimer = 0f;
+                bonusProjectileCount = 0;
+            }
+        }
     }
 
     public void SetCannonType(int type)
     {
-        this.type = (CannonTypes) type;
+        this.type = (CannonTypes)type;
     }
 
     public int GetCannonTypeInt()
@@ -67,9 +83,21 @@ public class Cannon : MonoBehaviour
                 return "";
         }
     }
+
+    public int GetCurrentProjectileCount()
+    {
+        return maxProjectileCount + bonusProjectileCount;
+    }
+
+    public void ApplyProjectileBoost(int extraProjectiles, float duration)
+    {
+        bonusProjectileCount = extraProjectiles;
+        projectileBoostTimer = duration;
+    }
+
     public void Shoot()
     {
-        BasicProjectile cannonBall; 
+        BasicProjectile cannonBall;
         Rigidbody2D rb;
         if (projectile != null && !reloading && burstDone) //if bullet exists and your arent currently reloading
         {
@@ -98,6 +126,9 @@ public class Cannon : MonoBehaviour
         {
             reloading = true;
             burstDone = false; //extra field to ensure countdown doesn't start while we are still burst firing!
+
+            int projectileCount = GetCurrentProjectileCount();
+
             for (int i = 0; i < maxProjectileCount; i++)
             {
                 cannonBall = Instantiate(projectile, transform.position, Quaternion.identity);
@@ -111,10 +142,21 @@ public class Cannon : MonoBehaviour
 
         void ShotgunShot()
         {
+            int projectileCount = GetCurrentProjectileCount();
+
+            if (projectileCount <= 1)
+            {
+                cannonBall = Instantiate(projectile, transform.position, Quaternion.identity);
+                cannonBall.enemy = enemy;
+                rb = cannonBall.GetComponent<Rigidbody2D>();
+                rb.linearVelocity = transform.right * projectileSpeed;
+                return;
+            }
+
             //int counter = 0; //debug
             int remainder = maxProjectileCount - 1; //number of bullets to be split on negative and positive quadrants (ex. 2 for 3 or 3 for 4) 
             float angleStep = 90 / remainder; // 45 for 2; for even bullet counts this angle step leads to there not being a straight shot bullet as it skips over 0 degs
-            for(float i = -45f; i <= 45; i+= angleStep)
+            for (float i = -45f; i <= 45; i += angleStep)
             {
                 cannonBall = Instantiate(projectile, transform.position, Quaternion.identity);
                 cannonBall.enemy = enemy;
@@ -125,5 +167,5 @@ public class Cannon : MonoBehaviour
             }
         }
     }
-    
+
 }
