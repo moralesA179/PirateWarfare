@@ -14,7 +14,7 @@ public class PlayerData : MonoBehaviour
 
     [Range(0, 4)]
     public static int levelsComplete = 0;
-    public static int maxHealth = 100, currentHealth, score = 0;
+    public static int maxHealth = 100, currentHealth = maxHealth, score = 0;
     public static float speedMult = 1f;
     public static int baseDamage = 5;
     //public static ItemList[] <-- Future(We need to keep track of current items player has)
