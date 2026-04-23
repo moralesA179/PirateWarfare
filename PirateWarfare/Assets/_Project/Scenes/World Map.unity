@@ -267,6 +267,18 @@ PrefabInstance:
       propertyPath: m_Volume
       value: 0.05
       objectReference: {fileID: 0}
+    - target: {fileID: 5812894086588736535, guid: 95139b1ce0644eb41bcfd8f6a86c06a0, type: 3}
+      propertyPath: MusicSections.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5812894086588736535, guid: 95139b1ce0644eb41bcfd8f6a86c06a0, type: 3}
+      propertyPath: 'MusicSections.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: c109fab4c6beae84297d8ca72c1073e7, type: 3}
+    - target: {fileID: 5812894086588736535, guid: 95139b1ce0644eb41bcfd8f6a86c06a0, type: 3}
+      propertyPath: 'MusicSections.Array.data[3]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 4941095b80498491786d3e14724c75c2, type: 3}
     - target: {fileID: 6540346467186080342, guid: 95139b1ce0644eb41bcfd8f6a86c06a0, type: 3}
       propertyPath: m_Name
       value: PlayerShip

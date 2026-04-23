@@ -186,6 +186,22 @@ PrefabInstance:
       propertyPath: projectile
       value: 
       objectReference: {fileID: 7860781618485091648, guid: a316a7edb534b68498d7bd90a2e56239, type: 3}
+    - target: {fileID: 5812894086588736535, guid: 95139b1ce0644eb41bcfd8f6a86c06a0, type: 3}
+      propertyPath: sailSource
+      value: 
+      objectReference: {fileID: 1913177931}
+    - target: {fileID: 5812894086588736535, guid: 95139b1ce0644eb41bcfd8f6a86c06a0, type: 3}
+      propertyPath: MusicSections.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5812894086588736535, guid: 95139b1ce0644eb41bcfd8f6a86c06a0, type: 3}
+      propertyPath: 'MusicSections.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: c109fab4c6beae84297d8ca72c1073e7, type: 3}
+    - target: {fileID: 5812894086588736535, guid: 95139b1ce0644eb41bcfd8f6a86c06a0, type: 3}
+      propertyPath: 'MusicSections.Array.data[3]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 4941095b80498491786d3e14724c75c2, type: 3}
     - target: {fileID: 6540346467186080342, guid: 95139b1ce0644eb41bcfd8f6a86c06a0, type: 3}
       propertyPath: m_Name
       value: PlayerShip
@@ -5350,6 +5366,11 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!82 &1913177931 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 3744298806179930370, guid: 95139b1ce0644eb41bcfd8f6a86c06a0, type: 3}
+  m_PrefabInstance: {fileID: 155666051}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1945863764
 GameObject:
   m_ObjectHideFlags: 0

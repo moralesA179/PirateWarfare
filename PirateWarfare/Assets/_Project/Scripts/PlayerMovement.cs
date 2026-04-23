@@ -27,12 +27,14 @@ public class PlayerMovement : MonoBehaviour
         {
             cannons[0].Shoot();
             musicPlayer.Shoot();
+            musicPlayer.SailStart();
         }
 
         if (Input.GetMouseButtonDown(1) && !cannons[0].reloading) //right click
         {
             cannons[1].Shoot();
             musicPlayer.Shoot();
+            musicPlayer.SailStart();
         }
 
         //if (Input.GetKeyDown(KeyCode.F))
@@ -50,13 +52,23 @@ public class PlayerMovement : MonoBehaviour
         //debug stuff
         if (Input.GetKeyUp(KeyCode.G))
         {
+            musicPlayer.Shop();
             SceneManager.LoadScene("Shop&Items");
-
         }
 
         if (Input.GetKeyUp(KeyCode.B))
         {
             PlayerData.score += 100;
+        }
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            musicPlayer.SailStart();
+        }
+
+        // stop sailing when W is released
+        if (Input.GetKeyUp(KeyCode.W))
+        {
+            musicPlayer.SailStop();
         }
     }
     void FixedUpdate()
@@ -71,6 +83,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.W))
         {
             movementDir -= (Vector2)transform.up;
+            
         }
         if (Input.GetKey(KeyCode.A))
         {

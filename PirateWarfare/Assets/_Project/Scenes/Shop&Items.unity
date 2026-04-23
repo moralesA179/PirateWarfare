@@ -1983,6 +1983,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5812894086588736535, guid: 95139b1ce0644eb41bcfd8f6a86c06a0, type: 3}
+      propertyPath: MusicSections.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5812894086588736535, guid: 95139b1ce0644eb41bcfd8f6a86c06a0, type: 3}
+      propertyPath: 'MusicSections.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 4941095b80498491786d3e14724c75c2, type: 3}
     - target: {fileID: 6540346467186080342, guid: 95139b1ce0644eb41bcfd8f6a86c06a0, type: 3}
       propertyPath: m_Name
       value: PlayerShip
@@ -2611,9 +2619,6 @@ MonoBehaviour:
   - {fileID: 7860781618485091648, guid: a316a7edb534b68498d7bd90a2e56239, type: 3}
   - {fileID: 6788082967019653047, guid: 4febab33ed1749a419b177f30625049e, type: 3}
   - {fileID: 3342840225283109576, guid: fc6944ced1f6d684c8342d0f352d0cee, type: 3}
-  healthCost: 50
-  speedCost: 50
-  damageCost: 50
   cannonCosts: 000000006400000096000000
   projectileCosts: 0000000064000000c8000000
   max_time: 500
