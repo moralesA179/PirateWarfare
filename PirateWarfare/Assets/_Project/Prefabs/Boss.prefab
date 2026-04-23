@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 1581920693290570918}
   - component: {fileID: 7765786107016238067}
   - component: {fileID: 8322415379995974620}
+  - component: {fileID: -6525005527405387085}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Enemy
@@ -197,8 +198,6 @@ MonoBehaviour:
   minFireRate: 0.8
   maxFireRate: 1.8
   isBoss: 1
-  doubleFireChance: 0.2
-  mistakeChance: 0.1
 --- !u!114 &1581920693290570918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,6 +216,7 @@ MonoBehaviour:
   scrapPrefab: {fileID: 0}
   damageNum: {fileID: 4535555547566147689, guid: 1562fcffa25f323408ac1f170c30cf54, type: 3}
   dropChance: 0.3
+  isBoss: 1
 --- !u!114 &7765786107016238067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,10 +232,14 @@ MonoBehaviour:
   player: {fileID: 0}
   orbitRadius: 9
   buffer: 3
-  orbitSpeed: 0.05
-  rotationSpeed: 45
   canShoot: 0
+  normalMoveSpeed: 3.5
+  normalOrbitSpeed: 0.5
+  normalRotationSpeed: 90
   isBoss: 1
+  bossMoveSpeed: 1.5
+  bossOrbitSpeed: 0.2
+  bossRotationSpeed: 15
   bowOffset: 90
   broadsideOffset: 0
 --- !u!195 &8322415379995974620
@@ -260,6 +264,18 @@ NavMeshAgent:
   m_BaseOffset: 0.565
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &-6525005527405387085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6571461485348306334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be85ec6211ac0864dbab5252bf1b9f53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7638232671405666525
 GameObject:
   m_ObjectHideFlags: 0

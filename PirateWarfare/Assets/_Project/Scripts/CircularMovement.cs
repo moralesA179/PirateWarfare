@@ -6,10 +6,18 @@ public class CircularMovement : MonoBehaviour
     public Transform player;
     public float orbitRadius = 10f;      // Base distance to chase until
     public float buffer = 2f;            // Creates the 8m to 12m revolve zone
-    public float orbitSpeed = 0.5f;      // How fast it circles
-    public float rotationSpeed = 45f;    // How fast the ship rotates/turns
     public bool canShoot = false;
+
+    [Header("Normal Ship Speeds")]
+    public float normalMoveSpeed = 3.5f;    // How fast it chases (NavMesh speed)
+    public float normalOrbitSpeed = 0.5f;   // How fast it circles
+    public float normalRotationSpeed = 90f; // How fast it turns
+
+    [Header("Boss Settings")]
     public bool isBoss = false;
+    public float bossMoveSpeed = 1.5f;      // Bosses chase slower
+    public float bossOrbitSpeed = 0.2f;     // Bosses revolve slower
+    public float bossRotationSpeed = 15f;   // Bosses turn much slower
 
     [Header("Sprite Rotation Offsets")]
     [Tooltip("Adjust this if the ship doesn't face the player correctly while chasing.")]
@@ -32,19 +40,9 @@ public class CircularMovement : MonoBehaviour
     {
         if (player == null) return;
 
-        if (isBoss)
-        {
-            // BOSS STATE - Stop moving, keep cannons aimed
-            canShoot = true; // Ensure the boss is allowed to shoot
-            agent.isStopped = true;
-            RotateShip(true); // True = Broadside
-
-            // Sync angle so we don't snap if they move away
-            Vector2 dirBossToPlayer = transform.position - player.position;
-            currentOrbitAngle = Mathf.Atan2(dirBossToPlayer.y, dirBossToPlayer.x);
-
-            return; // EXIT HERE so the boss doesn't run the normal movement code below
-        }
+        // Automatically set the correct speeds based on if this ship is a boss
+        agent.speed = isBoss ? bossMoveSpeed : normalMoveSpeed;
+        float activeOrbitSpeed = isBoss ? bossOrbitSpeed : normalOrbitSpeed;
 
         float playerDistance = Vector2.Distance(transform.position, player.position);
 
@@ -79,7 +77,7 @@ public class CircularMovement : MonoBehaviour
                 // REVOLVE STATE (Between 8m and 12m) - Move circular, Broadside
                 agent.isStopped = false;
 
-                currentOrbitAngle += orbitSpeed * Time.deltaTime;
+                currentOrbitAngle += activeOrbitSpeed * Time.deltaTime;
 
                 float x = Mathf.Cos(currentOrbitAngle) * orbitRadius;
                 float y = Mathf.Sin(currentOrbitAngle) * orbitRadius;
@@ -115,9 +113,12 @@ public class CircularMovement : MonoBehaviour
         // Apply the correct offset depending on if we are chasing or shooting
         float finalTargetAngle = targetAngleToPlayer + (isBroadside ? broadsideOffset : bowOffset);
 
-        // Smoothly rotate towards the target angle using the new rotationSpeed variable
+        // Get the correct rotation speed
+        float activeRotationSpeed = isBoss ? bossRotationSpeed : normalRotationSpeed;
+
+        // Smoothly rotate towards the target angle
         float currentAngle = transform.eulerAngles.z;
-        float smoothedAngle = Mathf.MoveTowardsAngle(currentAngle, finalTargetAngle, rotationSpeed * Time.deltaTime);
+        float smoothedAngle = Mathf.MoveTowardsAngle(currentAngle, finalTargetAngle, activeRotationSpeed * Time.deltaTime);
 
         transform.rotation = Quaternion.Euler(0, 0, smoothedAngle);
     }

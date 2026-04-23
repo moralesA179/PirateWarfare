@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 2133703166327092236}
   - component: {fileID: 3123549414311928644}
   - component: {fileID: 6984650450641212305}
+  - component: {fileID: 7474156083493480512}
   m_Layer: 0
   m_Name: Shooter1
   m_TagString: Enemy
@@ -197,8 +198,6 @@ MonoBehaviour:
   minFireRate: 0.8
   maxFireRate: 1.8
   isBoss: 0
-  doubleFireChance: 0.2
-  mistakeChance: 0.1
 --- !u!114 &2133703166327092236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,12 +210,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dc364c9144c9f14cb3be2caa9787b21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 100
+  maxHealth: 20
+  currentHealth: 20
   burstStrength: 5
-  scrapPrefab: {fileID: 0}
+  scrapPrefab: {fileID: 6293482269936185853, guid: 89e054180b6c68549a419b661fd19b9a, type: 3}
   damageNum: {fileID: 4535555547566147689, guid: 1562fcffa25f323408ac1f170c30cf54, type: 3}
   dropChance: 0.3
+  isBoss: 0
 --- !u!114 &3123549414311928644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,13 +229,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8d22200e88704c3e92f269280cee93f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  orbitRadius: 9
+  player: {fileID: 2347061429529240340, guid: 95139b1ce0644eb41bcfd8f6a86c06a0, type: 3}
+  orbitRadius: 5
   buffer: 3
-  orbitSpeed: 0.05
-  rotationSpeed: 45
   canShoot: 0
+  normalMoveSpeed: 3.5
+  normalOrbitSpeed: 0.5
+  normalRotationSpeed: 90
   isBoss: 0
+  bossMoveSpeed: 1.5
+  bossOrbitSpeed: 0.2
+  bossRotationSpeed: 15
   bowOffset: 90
   broadsideOffset: 0
 --- !u!195 &6984650450641212305
@@ -260,6 +264,18 @@ NavMeshAgent:
   m_BaseOffset: 0.565
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &7474156083493480512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4372187834453409428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be85ec6211ac0864dbab5252bf1b9f53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4737561716174435527
 GameObject:
   m_ObjectHideFlags: 0
@@ -366,7 +382,7 @@ MonoBehaviour:
   reloading: 0
   projectileSpeed: 4
   enemy: 1
-  boss: 1
+  boss: 0
   bossScaleMultiplier: 3
   type: 0
   maxProjectileCount: 3
@@ -515,7 +531,7 @@ MonoBehaviour:
   reloading: 0
   projectileSpeed: 4
   enemy: 1
-  boss: 1
+  boss: 0
   bossScaleMultiplier: 3
   type: 0
   maxProjectileCount: 3

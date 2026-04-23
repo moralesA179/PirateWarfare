@@ -45,10 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88ca5bf61b0bc9d43b8daf47a207b0a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabToSpawn: {fileID: 8968935102400179387, guid: 84affaf3c05819544990de85c7783b10, type: 3}
+  prefabToSpawn: {fileID: 4372187834453409428, guid: 84affaf3c05819544990de85c7783b10, type: 3}
   spawnInterval: 3
   spawnRadius: 3
-  targetPlayer: {fileID: 0}
+  targetPlayer: {fileID: 2347061429529240340, guid: 95139b1ce0644eb41bcfd8f6a86c06a0, type: 3}
 --- !u!212 &-1666925508045102840
 SpriteRenderer:
   m_ObjectHideFlags: 0

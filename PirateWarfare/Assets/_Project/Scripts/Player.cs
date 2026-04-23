@@ -14,7 +14,7 @@ public class PlayerData : MonoBehaviour
 
     [Range(0, 4)]
     public static int levelsComplete = 0;
-    public static int maxHealth = 100, currentHealth = maxHealth, score = 0;
+    public static int maxHealth = 100, currentHealth = 80, score = 0;
     public static float speedMult = 1f;
     public static int baseDamage = 5;
     //public static ItemList[] <-- Future(We need to keep track of current items player has)
@@ -89,7 +89,7 @@ public class PlayerData : MonoBehaviour
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         HealthUIManager.UpdateHealthUI(damage, false);
-        if (currentHealth == 0)
+        if (currentHealth <= 0)
         { 
 
             SceneManager.LoadScene("GameOver");

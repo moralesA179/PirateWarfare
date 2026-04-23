@@ -38,9 +38,11 @@ public class Enemy : MonoBehaviour
 
         if (currentHealth <= 0)
         {
+
             currentHealth = 0;
             isDead = true;
-            //TryDropScrap(); <-- We can try to edit this later...
+            TryDropScrap(); //<-- We can try to edit this later...
+            PlayerData.score += 50;
             Destroy(gameObject);
         }
 

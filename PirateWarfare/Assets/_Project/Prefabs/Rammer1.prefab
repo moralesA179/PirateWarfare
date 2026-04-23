@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 4599254274517719033}
   - component: {fileID: 7319851480329883157}
   - component: {fileID: 4393147328724335808}
+  - component: {fileID: 183783618880386009}
   m_Layer: 0
   m_Name: Rammer1
   m_TagString: Enemy
@@ -122,9 +123,10 @@ MonoBehaviour:
   maxHealth: 10
   currentHealth: 10
   burstStrength: 5
-  scrapPrefab: {fileID: 0}
+  scrapPrefab: {fileID: 6293482269936185853, guid: 89e054180b6c68549a419b661fd19b9a, type: 3}
   damageNum: {fileID: 4535555547566147689, guid: 1562fcffa25f323408ac1f170c30cf54, type: 3}
   dropChance: 0.3
+  isBoss: 0
 --- !u!50 &6103557135784681347
 Rigidbody2D:
   serializedVersion: 5
@@ -233,3 +235,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &183783618880386009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 850380256892853737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be85ec6211ac0864dbab5252bf1b9f53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
