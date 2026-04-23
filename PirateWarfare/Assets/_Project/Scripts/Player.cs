@@ -80,7 +80,7 @@ public class PlayerData : MonoBehaviour
             animator.SetInteger("HealthState", (int)HealthState.Full);
         }
 
-        Debug.Log(string.Join(",", CannonInventory.Keys.ToArray()));
+        //Debug.Log(string.Join(",", CannonInventory.Keys.ToArray()));
 
     }
 
@@ -128,5 +128,14 @@ public class PlayerData : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Colliding with any ships is a guarentee 10 damage
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            TakeDamage(10);
+        }
     }
 }
