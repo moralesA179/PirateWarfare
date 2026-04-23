@@ -221,9 +221,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6a1219982d8a4b0da5640b0defab903, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MusicSections: []
+  MusicSections:
+  - {fileID: 8300000, guid: 7a79895366c89aa44bbaa2898914ea18, type: 3}
+  - {fileID: 8300000, guid: 834b276891c4c7e4f9ba254b2b713d92, type: 3}
+  - {fileID: 8300000, guid: c109fab4c6beae84297d8ca72c1073e7, type: 3}
   playIntro: 1
-  sailSource: {fileID: 0}
+  sailSource: {fileID: 155666052}
 --- !u!114 &143893713 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 931639355168609803, guid: 6e61a45107f91ce49b48b2fae15cad43, type: 3}
@@ -299,6 +302,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 104425595}
   m_SourcePrefab: {fileID: 100100000, guid: 95139b1ce0644eb41bcfd8f6a86c06a0, type: 3}
+--- !u!82 &155666052 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 3744298806179930370, guid: 95139b1ce0644eb41bcfd8f6a86c06a0, type: 3}
+  m_PrefabInstance: {fileID: 155666051}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &157657682
 GameObject:
   m_ObjectHideFlags: 0
@@ -5142,7 +5150,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 6a222603e1c254910bd40d483aef28b0, type: 3}
+  m_Resource: {fileID: 8300000, guid: 4a1ad60771a94bc448449ae82b7e4192, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.296
   m_Pitch: 1
