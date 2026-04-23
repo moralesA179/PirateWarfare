@@ -19,11 +19,14 @@ public class MusicPlayer : MonoBehaviour
     private int lastPlayed;
     // This keeps a log of the last played music section. Leave this alone unless you know what you are doing!
     private bool preloadBufferActive = true;
-    // Necessary Preload buffer, leave this alone unless you know what you are doing!
-
+    // Necessary Preload buffer, leave this alone unless you know what you are doing!.
+    public AudioSource sailSource;   // looping movement sound
+    
+ 
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        sailSource = GetComponent<AudioSource>();
     }
 
     public void Shoot()
@@ -36,6 +39,29 @@ public class MusicPlayer : MonoBehaviour
     public void Damage()
     {
         audioSource.PlayOneShot(MusicSections[1]);
+    }
+
+    public void SailStart()
+    {
+        if (!sailSource.isPlaying)
+        {
+            sailSource.clip = MusicSections[2];
+            sailSource.loop = true;
+            sailSource.Play();
+        }
+    }
+
+    public void SailStop()
+    {
+        if (sailSource.isPlaying)
+        {
+            sailSource.Stop();
+        }
+    }
+
+    public void Shop()
+    {
+        audioSource.clip = MusicSections[3];
     }
 
 }

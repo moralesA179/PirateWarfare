@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/_Project/Scenes/temp.unity
     guid: f943324840c99734f9eebbbebcfc9390
   - enabled: 1
+    path: Assets/_Project/Scenes/Level 1.unity
+    guid: 325d9e877cba4ee42897598921a23969
+  - enabled: 1
     path: Assets/_Project/Scenes/Level 2.unity
     guid: 369a3df7998cef841b57b9531a1bf252
   - enabled: 1
