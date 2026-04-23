@@ -27,7 +27,7 @@ public class BasicProjectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Lifetime: " + lifeTime);
+        //Debug.Log("Lifetime: " + lifeTime);
         if (lifeTime > 0)
         {
             lifeTime--;

@@ -11,19 +11,23 @@ public class EnemyShoot : MonoBehaviour
     //public Cannon leftCannon;
     //public Cannon rightCannon;
 
+    CircularMovement circularMovement;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         cannons = GetComponentsInChildren<Cannon>();
+        circularMovement = GetComponent<CircularMovement>();
         //Debug.Log("Cannons found: " + cannons.Length);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Time.time >= nextFireTime)
+        if (Time.time >= nextFireTime && circularMovement.canShoot)
         {
+            Debug.Log("SHOT! , can shoot? " + circularMovement.canShoot);
             if (t.right.x > 0)
             {
                 cannons[0].Shoot();
