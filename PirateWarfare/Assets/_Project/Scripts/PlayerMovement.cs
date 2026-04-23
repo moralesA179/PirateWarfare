@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
             musicPlayer.Shoot();
         }
 
-        if (Input.GetMouseButtonDown(1) && !cannons[0].reloading) //right click
+        if (Input.GetMouseButtonDown(1) && !cannons[1].reloading) //right click
         {
             cannons[1].Shoot();
             musicPlayer.Shoot();

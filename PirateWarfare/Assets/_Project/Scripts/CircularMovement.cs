@@ -1,22 +1,25 @@
-
 using UnityEngine;
 using UnityEngine.AI;
-using static UnityEngine.GraphicsBuffer;
 
 public class CircularMovement : MonoBehaviour
 {
     public Transform player;
-    public float orbitRadius = 10f;     // distance from player
-    public float orbitSpeed = .5f;       // how fast it circles
-    public float rotationSpeed = 360.0f;
-    public float buffer = 2f;
-    private bool isRevolving = false;
+    public float orbitRadius = 10f;      // Base distance to chase until
+    public float buffer = 2f;            // Creates the 8m to 12m revolve zone
+    public float orbitSpeed = 0.5f;      // How fast it circles
+    public float rotationSpeed = 45f;    // How fast the ship rotates/turns
+    public bool canShoot = false;
+    public bool isBoss = false;
+
+    [Header("Sprite Rotation Offsets")]
+    [Tooltip("Adjust this if the ship doesn't face the player correctly while chasing.")]
+    public float bowOffset = 90f;
+    [Tooltip("Adjust this if the wrong side of the ship faces the player while shooting (Usually 90 degrees different from the bow).")]
+    public float broadsideOffset = 0f;
+
     private bool isBuffered = false;
-    private float playerDistance;
-
-
     private NavMeshAgent agent;
-    private float angle;
+    private float currentOrbitAngle;
 
     void Start()
     {
@@ -29,59 +32,93 @@ public class CircularMovement : MonoBehaviour
     {
         if (player == null) return;
 
-        Vector3 direction = player.position - transform.position;
-
-        playerDistance = Vector2.Distance(transform.position, player.position);
-
-        if (playerDistance > orbitRadius && !isBuffered)
+        if (isBoss)
         {
-            agent.SetDestination(player.position);
+            // BOSS STATE - Stop moving, keep cannons aimed
+            canShoot = true; // Ensure the boss is allowed to shoot
+            agent.isStopped = true;
+            RotateShip(true); // True = Broadside
 
-            direction = player.position - transform.position;
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 90f;
-            transform.rotation = Quaternion.Euler(0, 0, angle);
+            // Sync angle so we don't snap if they move away
+            Vector2 dirBossToPlayer = transform.position - player.position;
+            currentOrbitAngle = Mathf.Atan2(dirBossToPlayer.y, dirBossToPlayer.x);
+
+            return; // EXIT HERE so the boss doesn't run the normal movement code below
         }
-        else if (playerDistance <= orbitRadius && !isBuffered)
+
+        float playerDistance = Vector2.Distance(transform.position, player.position);
+
+        // 1. Manage the Buffer State
+        if (isBuffered && playerDistance > orbitRadius + buffer)
+        {
+            isBuffered = false;
+        }
+        else if (!isBuffered && playerDistance <= orbitRadius)
         {
             isBuffered = true;
+            Vector2 dirToPlayer = transform.position - player.position;
+            currentOrbitAngle = Mathf.Atan2(dirToPlayer.y, dirToPlayer.x);
         }
-        else if (isBuffered)
+
+        // 2. Execute Behaviors
+        if (!isBuffered)
         {
-            if (playerDistance > orbitRadius + buffer)
+            // CHASE STATE (Outside 12m) - Move straight, Bow forward
+            canShoot = false;
+            agent.isStopped = false;
+            agent.SetDestination(player.position);
+            RotateShip(false); // False = Bow forward
+        }
+        else
+        {
+            // BUFFERED STATE 
+            canShoot = true;
+
+            if (playerDistance >= orbitRadius - buffer)
             {
-                isBuffered = false;
+                // REVOLVE STATE (Between 8m and 12m) - Move circular, Broadside
                 agent.isStopped = false;
 
-            }
+                currentOrbitAngle += orbitSpeed * Time.deltaTime;
 
-            else if (playerDistance > orbitRadius - buffer && playerDistance < orbitRadius + buffer)
-            {
-                agent.isStopped = false;
-
-                // Increase angle over time
-                angle += orbitSpeed * Time.deltaTime;
-
-                // Calculate circular position around player
-                float x = Mathf.Cos(angle) * orbitRadius;
-                float y = Mathf.Sin(angle) * orbitRadius;
+                float x = Mathf.Cos(currentOrbitAngle) * orbitRadius;
+                float y = Mathf.Sin(currentOrbitAngle) * orbitRadius;
 
                 Vector3 orbitPosition = new Vector3(
-                  player.position.x + x,
-                  player.position.y + y,
-                  player.position.z
+                    player.position.x + x,
+                    player.position.y + y,
+                    player.position.z
                 );
 
-                agent.SetDestination(player.position);
+                agent.SetDestination(orbitPosition);
+                RotateShip(true); // True = Broadside
             }
-
-            else if (playerDistance < orbitRadius - buffer)
+            else
             {
+                // TOO CLOSE STATE (Under 8m) - Stop moving, keep cannons aimed
                 agent.isStopped = true;
-                direction = player.position - transform.position;
-                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-                transform.rotation = Quaternion.Euler(0, 0, angle);
-            }
+                RotateShip(true); // True = Broadside
 
+                // Sync angle so we don't snap if they move away
+                Vector2 dirToPlayer = transform.position - player.position;
+                currentOrbitAngle = Mathf.Atan2(dirToPlayer.y, dirToPlayer.x);
+            }
         }
+    }
+
+    // Handles the rotation based on combat state
+    private void RotateShip(bool isBroadside)
+    {
+        Vector2 direction = player.position - transform.position;
+        float targetAngleToPlayer = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        // Apply the correct offset depending on if we are chasing or shooting
+        float finalTargetAngle = targetAngleToPlayer + (isBroadside ? broadsideOffset : bowOffset);
+
+        // Smoothly rotate towards the target angle using the new rotationSpeed variable
+        float currentAngle = transform.eulerAngles.z;
+        float smoothedAngle = Mathf.MoveTowardsAngle(currentAngle, finalTargetAngle, rotationSpeed * Time.deltaTime);
+
+        transform.rotation = Quaternion.Euler(0, 0, smoothedAngle);
     }
 }

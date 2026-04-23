@@ -10,6 +10,10 @@ public class Cannon : MonoBehaviour
     private bool burstDone = true;
     public float projectileSpeed = 4.0f;
     public bool enemy = false; //used to determine what type of projectile to shoot (friendly or not)
+
+    public bool boss = false;
+    public float bossScaleMultiplier = 2f; // Added multiplier for boss projectile size
+
     public enum CannonTypes { Base, Shotgun, Burst };
     public CannonTypes type;
     [Range(3, 10)]
@@ -20,31 +24,28 @@ public class Cannon : MonoBehaviour
     public int bonusProjectileCount = 0;
     public float projectileBoostTimer = 0f;
 
-    //timer to prevent spam
-    private int currentDelay = 0;
-    [Tooltip("Number of FRAMES the reload should take to complete.")]
-    public int targetDelay = 320;
+    [Header("Reload Settings")]
+    [Tooltip("Time in SECONDS the reload takes to complete.")]
+    public float reloadTimeInSeconds = 1.5f; // Replaced targetDelay
+    private float currentReloadTimer = 0f;   // Replaced currentDelay
 
     private void Update()
     {
-        if (reloading && burstDone) //only start count when the burstfire is done 
+        // Time-based reload logic
+        if (reloading && burstDone)
         {
-            currentDelay++;
-            //Debug.Log(currentDelay);
-            reloading = currentDelay < targetDelay;
-        }
-        else
-        {
-            currentDelay = 0;
-        }
+            currentReloadTimer += Time.deltaTime; // Add the time passed since last frame
 
-        //Debug.DrawLine(transform.position, transform.position + transform.right, Color.red);
-        //Debug.DrawLine(transform.position, transform.position + transform.up, Color.green);
-        //Debug.Log($"({transform.right.normalized}, {transform.up.normalized})");
-        //Debug.DrawLine(transform.position, transform.position + (transform.up + transform.right));
-        //Debug.DrawLine(transform.position, transform.position + (-transform.up + transform.right));
-        //Vector3 l = Quaternion.AngleAxis(30f, transform.forward.normalized) * transform.right;
-        //Debug.DrawLine(transform.position, transform.position + l, Color.blue);
+            if (currentReloadTimer >= reloadTimeInSeconds)
+            {
+                reloading = false; // Done reloading
+                currentReloadTimer = 0f; // Reset timer
+            }
+        }
+        else if (!reloading)
+        {
+            currentReloadTimer = 0f;
+        }
 
         //Count down temporary projectile boost
         if (projectileBoostTimer > 0f)
@@ -95,7 +96,7 @@ public class Cannon : MonoBehaviour
         projectileBoostTimer = duration;
     }
 
-    public void Shoot()
+    public bool Shoot()
     {
         BasicProjectile cannonBall;
         Rigidbody2D rb;
@@ -107,23 +108,27 @@ public class Cannon : MonoBehaviour
             {
                 case CannonTypes.Base:
                     cannonBall = Instantiate(projectile, transform.position, Quaternion.identity);
+                    if (boss) cannonBall.transform.localScale *= bossScaleMultiplier; // Apply boss scale
+
                     if (shipCollider != null) Physics2D.IgnoreCollision(cannonBall.GetComponent<Collider2D>(), shipCollider); // Ignored collision
                     cannonBall.enemy = enemy;
                     rb = cannonBall.GetComponent<Rigidbody2D>();
                     rb.linearVelocity = transform.right * projectileSpeed;
                     reloading = true;
-                    break;
+                    return true;
                 case CannonTypes.Shotgun:
                     ShotgunShot();
                     reloading = true;
-                    break;
+                    return true;
                 case CannonTypes.Burst:
                     StartCoroutine(BurstShot());
-                    break;
+                    return true;
                 default:
                     break;
             }
         }
+
+        return false;
 
         IEnumerator BurstShot()
         {
@@ -135,6 +140,8 @@ public class Cannon : MonoBehaviour
             for (int i = 0; i < projectileCount; i++) // Fixed: Used projectileCount to allow powerups to work
             {
                 cannonBall = Instantiate(projectile, transform.position, Quaternion.identity);
+                if (boss) cannonBall.transform.localScale *= bossScaleMultiplier; // Apply boss scale
+
                 if (shipCollider != null) Physics2D.IgnoreCollision(cannonBall.GetComponent<Collider2D>(), shipCollider); // Ignored collision
                 cannonBall.enemy = enemy;
                 rb = cannonBall.GetComponent<Rigidbody2D>();
@@ -151,6 +158,8 @@ public class Cannon : MonoBehaviour
             if (projectileCount <= 1)
             {
                 cannonBall = Instantiate(projectile, transform.position, Quaternion.identity);
+                if (boss) cannonBall.transform.localScale *= bossScaleMultiplier; // Apply boss scale
+
                 if (shipCollider != null) Physics2D.IgnoreCollision(cannonBall.GetComponent<Collider2D>(), shipCollider); // Ignored collision
                 cannonBall.enemy = enemy;
                 rb = cannonBall.GetComponent<Rigidbody2D>();
@@ -158,20 +167,19 @@ public class Cannon : MonoBehaviour
                 return;
             }
 
-            //int counter = 0; //debug
             int remainder = projectileCount - 1; // Fixed: Used projectileCount to allow powerups to work
             float angleStep = 90f / remainder; // 45 for 2; for even bullet counts this angle step leads to there not being a straight shot bullet as it skips over 0 degs
             for (float i = -45f; i <= 45; i += angleStep)
             {
                 cannonBall = Instantiate(projectile, transform.position, Quaternion.identity);
+                if (boss) cannonBall.transform.localScale *= bossScaleMultiplier; // Apply boss scale
+
                 if (shipCollider != null) Physics2D.IgnoreCollision(cannonBall.GetComponent<Collider2D>(), shipCollider); // Ignored collision
                 cannonBall.enemy = enemy;
                 rb = cannonBall.GetComponent<Rigidbody2D>();
                 Vector3 rotatedVector = Quaternion.AngleAxis(i, transform.forward.normalized) * transform.right; //rotating 30 degrees around z axis
                 rb.linearVelocity = rotatedVector * projectileSpeed;
-                //Debug.Log("Iteration: " + counter++);
             }
         }
     }
-
 }

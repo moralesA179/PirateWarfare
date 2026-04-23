@@ -48,7 +48,7 @@ public class ShopManager : MonoBehaviour
         {
             if (EnoughScore(speedCost))
             {
-                PlayerData.speedMult += 0.5f;
+                PlayerData.speedMult += 0.1f;
                 speedLevelCounter++;
                 PlayerData.score -= speedCost;
                 speedCost *= 2;

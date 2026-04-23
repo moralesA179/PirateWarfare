@@ -16,10 +16,9 @@ public class MusicPlayer : MonoBehaviour
 
     private AudioSource audioSource;
     // The audiosource is responsible for playing all of our 'MusicSections'.
-    private int lastPlayed;
     // This keeps a log of the last played music section. Leave this alone unless you know what you are doing!
-    private bool preloadBufferActive = true;
     // Necessary Preload buffer, leave this alone unless you know what you are doing!
+
 
     void Start()
     {

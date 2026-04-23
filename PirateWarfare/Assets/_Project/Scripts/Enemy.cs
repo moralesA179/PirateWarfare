@@ -63,7 +63,7 @@ public class Enemy : MonoBehaviour
             animator.SetInteger("HealthState", (int)HealthState.Full);
         }
 
-        Debug.Log("Enemy Current Health: " + currentHealth);
+        //Debug.Log("Enemy Current Health: " + currentHealth);
 
     }
 
@@ -98,7 +98,7 @@ public class Enemy : MonoBehaviour
             // 3. Apply the instant burst
             rb.AddForce(pushDirection * burstStrength, ForceMode2D.Impulse);
 
-            TakeDamage(15);
+            TakeDamage(5);
         }
     }
 }

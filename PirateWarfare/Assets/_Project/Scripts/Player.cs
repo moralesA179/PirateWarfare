@@ -135,7 +135,7 @@ public class PlayerData : MonoBehaviour
         // Colliding with any ships is a guarentee 10 damage
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            TakeDamage(10);
+            TakeDamage(20);
         }
     }
 }

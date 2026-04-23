@@ -39,8 +39,8 @@ public class GameUtilities : MonoBehaviour
             quitButton.onClick.AddListener(() => {
                 SceneManager.LoadScene("MainMenu");
             });
-        if (healButton != null)
-            healButton.onClick.AddListener(() => { PlayerData.Heal(heal); });
+        //if (healButton != null)
+        //    healButton.onClick.AddListener(() => { PlayerData.Heal(heal); });
     }
 
 
