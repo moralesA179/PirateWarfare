@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2999054061790812495}
   - component: {fileID: 7903615022124774969}
   - component: {fileID: 1463511992775942656}
+  - component: {fileID: 933988401057988851}
   m_Layer: 0
   m_Name: shooter
   m_TagString: Enemy
@@ -143,7 +144,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDamping: 0
+  m_LinearDamping: 2
   m_AngularDamping: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -194,3 +195,21 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.68, y: 1.15}
   m_Direction: 0
+--- !u!114 &933988401057988851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1513098467829940905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dc364c9144c9f14cb3be2caa9787b21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 50
+  currentHealth: 50
+  burstStrength: 5
+  scrapPrefab: {fileID: 0}
+  damageNum: {fileID: 0}
+  dropChance: 0.3

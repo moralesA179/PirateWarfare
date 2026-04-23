@@ -1,3 +1,4 @@
+
 using UnityEngine;
 using UnityEngine.AI;
 using static UnityEngine.GraphicsBuffer;
@@ -5,14 +6,14 @@ using static UnityEngine.GraphicsBuffer;
 public class CircularMovement : MonoBehaviour
 {
     public Transform player;
-    public float orbitRadius = 10f;     // distance from player
-    public float orbitSpeed = .5f;       // how fast it circles
-    public float rotationSpeed = 5.0f;  
+    public float orbitRadius = 10f;     // distance from player
+    public float orbitSpeed = .5f;       // how fast it circles
+    public float rotationSpeed = 360.0f;
     public float buffer = 2f;
     private bool isRevolving = false;
     private bool isBuffered = false;
     private float playerDistance;
-    
+
 
     private NavMeshAgent agent;
     private float angle;
@@ -28,37 +29,59 @@ public class CircularMovement : MonoBehaviour
     {
         if (player == null) return;
 
+        Vector3 direction = player.position - transform.position;
+
         playerDistance = Vector2.Distance(transform.position, player.position);
 
-        //if (playerDistance > orbitRadius && !isBuffered)
-        //{
-            // 1. Calculate the direction vector
-            Vector2 direction = player.position - transform.position;
+        if (playerDistance > orbitRadius && !isBuffered)
+        {
+            agent.SetDestination(player.position);
 
-            // 2. Find the angle in degrees
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            direction = player.position - transform.position;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 90f;
+            transform.rotation = Quaternion.Euler(0, 0, angle);
+        }
+        else if (playerDistance <= orbitRadius && !isBuffered)
+        {
+            isBuffered = true;
+        }
+        else if (isBuffered)
+        {
+            if (playerDistance > orbitRadius + buffer)
+            {
+                isBuffered = false;
+                agent.isStopped = false;
 
-            // 3. Create the target rotation
-            Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
+            }
 
-            // 4. Smoothly rotate toward the target rotation
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            else if (playerDistance > orbitRadius - buffer && playerDistance < orbitRadius + buffer)
+            {
+                agent.isStopped = false;
 
-        //}
+                // Increase angle over time
+                angle += orbitSpeed * Time.deltaTime;
 
-        // Increase angle over time
-        angle += orbitSpeed * Time.deltaTime;
+                // Calculate circular position around player
+                float x = Mathf.Cos(angle) * orbitRadius;
+                float y = Mathf.Sin(angle) * orbitRadius;
 
-        // Calculate circular position around player
-        float x = Mathf.Cos(angle) * orbitRadius;
-        float y = Mathf.Sin(angle) * orbitRadius;
+                Vector3 orbitPosition = new Vector3(
+                  player.position.x + x,
+                  player.position.y + y,
+                  player.position.z
+                );
 
-        Vector3 orbitPosition = new Vector3(
-            player.position.x + x,
-            player.position.y + y,
-            player.position.z
-        );
+                agent.SetDestination(player.position);
+            }
 
-        agent.SetDestination(player.position);
+            else if (playerDistance < orbitRadius - buffer)
+            {
+                agent.isStopped = true;
+                direction = player.position - transform.position;
+                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                transform.rotation = Quaternion.Euler(0, 0, angle);
+            }
+
+        }
     }
 }

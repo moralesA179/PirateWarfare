@@ -3856,6 +3856,10 @@ PrefabInstance:
       propertyPath: scrapPrefab
       value: 
       objectReference: {fileID: 1290368236}
+    - target: {fileID: 9014035435637791452, guid: 29fcd5df67bba4d4e95c99ab3f4d8bce, type: 3}
+      propertyPath: burstStrength
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
