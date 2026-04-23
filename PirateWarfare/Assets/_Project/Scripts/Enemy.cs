@@ -11,6 +11,8 @@ public class Enemy : MonoBehaviour
         Low = 2
     }
 
+    public int points;
+
     public int maxHealth = 100;
     public int currentHealth = 100;
     Animator animator;
@@ -42,7 +44,7 @@ public class Enemy : MonoBehaviour
             currentHealth = 0;
             isDead = true;
             TryDropScrap(); //<-- We can try to edit this later...
-            PlayerData.score += 50;
+            PlayerData.score += points;
             Destroy(gameObject);
         }
 

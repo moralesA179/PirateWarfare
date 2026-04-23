@@ -210,13 +210,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dc364c9144c9f14cb3be2caa9787b21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  points: 500
   maxHealth: 100
   currentHealth: 100
   burstStrength: 5
   scrapPrefab: {fileID: 0}
   damageNum: {fileID: 4535555547566147689, guid: 1562fcffa25f323408ac1f170c30cf54, type: 3}
   dropChance: 0.3
-  isBoss: 1
 --- !u!114 &7765786107016238067
 MonoBehaviour:
   m_ObjectHideFlags: 0

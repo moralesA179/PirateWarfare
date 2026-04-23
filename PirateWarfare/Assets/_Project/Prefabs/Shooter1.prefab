@@ -210,13 +210,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dc364c9144c9f14cb3be2caa9787b21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  points: 150
   maxHealth: 20
   currentHealth: 20
   burstStrength: 5
   scrapPrefab: {fileID: 6293482269936185853, guid: 89e054180b6c68549a419b661fd19b9a, type: 3}
   damageNum: {fileID: 4535555547566147689, guid: 1562fcffa25f323408ac1f170c30cf54, type: 3}
   dropChance: 0.3
-  isBoss: 0
 --- !u!114 &3123549414311928644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,7 +230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 2347061429529240340, guid: 95139b1ce0644eb41bcfd8f6a86c06a0, type: 3}
-  orbitRadius: 5
+  orbitRadius: 3
   buffer: 3
   canShoot: 0
   normalMoveSpeed: 3.5

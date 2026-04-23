@@ -4226,7 +4226,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8836518104720072164, guid: 543a255e2e11a984daeedd28c6d328df, type: 3}
       propertyPath: maxWaves
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8836518104720072164, guid: 543a255e2e11a984daeedd28c6d328df, type: 3}
       propertyPath: targetPlayer
@@ -4234,11 +4234,11 @@ PrefabInstance:
       objectReference: {fileID: 71934974}
     - target: {fileID: 8836518104720072164, guid: 543a255e2e11a984daeedd28c6d328df, type: 3}
       propertyPath: enemiesPerWave
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8836518104720072164, guid: 543a255e2e11a984daeedd28c6d328df, type: 3}
       propertyPath: timeBetweenWaves
-      value: 10
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

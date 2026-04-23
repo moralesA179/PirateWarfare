@@ -2611,9 +2611,6 @@ MonoBehaviour:
   - {fileID: 7860781618485091648, guid: a316a7edb534b68498d7bd90a2e56239, type: 3}
   - {fileID: 6788082967019653047, guid: 4febab33ed1749a419b177f30625049e, type: 3}
   - {fileID: 3342840225283109576, guid: fc6944ced1f6d684c8342d0f352d0cee, type: 3}
-  healthCost: 50
-  speedCost: 50
-  damageCost: 50
   cannonCosts: 000000006400000096000000
   projectileCosts: 0000000064000000c8000000
   max_time: 500
@@ -3403,14 +3400,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 0.03938818, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 1558050931053780594, guid: e3a4e77a65a9b2447985cb28c05bb593, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3480,14 +3477,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.9591135, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: -7714662150458616390, guid: 38dbd36f28653b6469a50b9e16d3ba52, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

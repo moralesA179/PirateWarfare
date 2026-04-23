@@ -119,6 +119,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &96972032 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2347061429529240340, guid: 95139b1ce0644eb41bcfd8f6a86c06a0, type: 3}
+  m_PrefabInstance: {fileID: 155666051}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &142034181 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3633021028977766971, guid: 6e61a45107f91ce49b48b2fae15cad43, type: 3}
@@ -3464,16 +3469,6 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 2147483649
-  - first: {x: -9, y: 0, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 27
-      m_TileSpriteIndex: 27
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 1
-      m_TileObjectToInstantiateIndex: 65535
-      dummyAlignment: 0
-      m_AllTileFlags: 2147483649
   - first: {x: 5, y: 0, z: 0}
     second:
       serializedVersion: 2
@@ -3830,7 +3825,7 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: e02b67fda35040d448d421b6467cab4d, type: 2}
   - m_RefCount: 4
     m_Data: {fileID: 11400000, guid: 8eda16ad64f5e8442b9402d59aeb4e5f, type: 2}
-  - m_RefCount: 3
+  - m_RefCount: 2
     m_Data: {fileID: 11400000, guid: b8617bc54f70248438030b378337d1c4, type: 2}
   - m_RefCount: 2
     m_Data: {fileID: 11400000, guid: d5742702b5f830f4a95c01cbcd13a2c8, type: 2}
@@ -3889,12 +3884,12 @@ Tilemap:
     m_Data: {fileID: -4273197323387495908, guid: 9637162555b89a449b4060a95b54bdb7, type: 3}
   - m_RefCount: 4
     m_Data: {fileID: 1732502984, guid: 9637162555b89a449b4060a95b54bdb7, type: 3}
-  - m_RefCount: 3
+  - m_RefCount: 2
     m_Data: {fileID: 1440025013, guid: 9637162555b89a449b4060a95b54bdb7, type: 3}
   - m_RefCount: 2
     m_Data: {fileID: -141549892, guid: 9637162555b89a449b4060a95b54bdb7, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 58
+  - m_RefCount: 57
     m_Data:
       e00: 1
       e01: 0
@@ -3915,7 +3910,7 @@ Tilemap:
   m_TileColorArray:
   - m_RefCount: 0
     m_Data: {r: 1.65e-43, g: 1.65e-43, b: 1.65e-43, a: 1.65e-43}
-  - m_RefCount: 58
+  - m_RefCount: 57
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -4060,14 +4055,6 @@ CompositeCollider2D:
         Y: 10000000
       - X: 0
         Y: 10000000
-    - - X: -80000000
-        Y: 10000000
-      - X: -90000000
-        Y: 10000000
-      - X: -90000000
-        Y: 0
-      - X: -80000000
-        Y: 0
     - - X: 0
         Y: -10000000
       - X: -70000000
@@ -4122,10 +4109,6 @@ CompositeCollider2D:
       - {x: -0.000029300001, y: 2}
       - {x: -1, y: 1.9999708}
       - {x: -0.99997073, y: 1}
-    - - {x: -8.00003, y: 0}
-      - {x: -8.00003, y: 1}
-      - {x: -9, y: 0.99997073}
-      - {x: -8.99997, y: 0}
     - - {x: -0.000029300001, y: -4}
       - {x: -0.000029300001, y: -1}
       - {x: -7, y: -1.0000293}
@@ -4507,8 +4490,16 @@ PrefabInstance:
       value: RammerSpawner
       objectReference: {fileID: 0}
     - target: {fileID: 6992244762215088834, guid: dfa09200ff23e7d408cadf38869cfe1a, type: 3}
+      propertyPath: targetPlayer
+      value: 
+      objectReference: {fileID: 96972032}
+    - target: {fileID: 6992244762215088834, guid: dfa09200ff23e7d408cadf38869cfe1a, type: 3}
       propertyPath: enemiesPerWave
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6992244762215088834, guid: dfa09200ff23e7d408cadf38869cfe1a, type: 3}
+      propertyPath: timeBetweenWaves
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4641,8 +4632,16 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8836518104720072164, guid: 543a255e2e11a984daeedd28c6d328df, type: 3}
+      propertyPath: targetPlayer
+      value: 
+      objectReference: {fileID: 96972032}
+    - target: {fileID: 8836518104720072164, guid: 543a255e2e11a984daeedd28c6d328df, type: 3}
       propertyPath: enemiesPerWave
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8836518104720072164, guid: 543a255e2e11a984daeedd28c6d328df, type: 3}
+      propertyPath: timeBetweenWaves
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4824,6 +4823,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2075082162834953369, guid: 6e61a45107f91ce49b48b2fae15cad43, type: 3}
+      propertyPath: heart
+      value: 
+      objectReference: {fileID: 1326543061}
     - target: {fileID: 3119389966280315169, guid: 6e61a45107f91ce49b48b2fae15cad43, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -5061,6 +5064,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1326543061 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3836958374792896196, guid: 6e61a45107f91ce49b48b2fae15cad43, type: 3}
+  m_PrefabInstance: {fileID: 1326543058}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4cad6a8cbe09384ba52fb4ef9783a0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1469048167 stripped

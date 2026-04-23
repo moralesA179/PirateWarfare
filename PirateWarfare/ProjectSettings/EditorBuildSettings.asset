@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/_Project/Scenes/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
+    path: Assets/_Project/Scenes/MainMenu.unity
+    guid: cc49fb1321a36724aa5762228dc7b6c7
+  - enabled: 1
     path: Assets/_Project/Scenes/World Map.unity
     guid: 55a55cf30d4e2514aacbfcee18888b1b
   - enabled: 1
@@ -16,7 +19,7 @@ EditorBuildSettings:
     guid: 773967d06cc6cf241a20f8bb7e56f49d
   - enabled: 1
     path: Assets/_Project/Scenes/Level 1.unity
-    guid: 325d9e877cba4ee42897598921a23969
+    guid: 822bed7826621af43ac90257bd373dbe
   - enabled: 1
     path: Assets/_Project/Scenes/Level 2.unity
     guid: 369a3df7998cef841b57b9531a1bf252
@@ -24,11 +27,11 @@ EditorBuildSettings:
     path: Assets/_Project/Scenes/Level 3.unity
     guid: 261ce9c3bad51a14fb40e65667c04c93
   - enabled: 1
-    path: Assets/_Project/Scenes/MainMenu.unity
-    guid: cc49fb1321a36724aa5762228dc7b6c7
-  - enabled: 1
     path: Assets/_Project/Scenes/Shop&Items.unity
     guid: b6c1c9f8b2e67974089f2d6d119f3381
+  - enabled: 1
+    path: Assets/_Project/Scenes/WinState.unity
+    guid: 868e53658d0065e46aea75dbb7a4b744
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
