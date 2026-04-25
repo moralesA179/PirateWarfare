@@ -3,12 +3,10 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
-    [Header("Scene Settings")]
     public string sceneToLoad = "World Map";
-    [Tooltip("How many seconds to wait after the last kill before loading the next scene")]
     public float delayBeforeLoading = 3f;
 
-    // Global counters that any script can access without needing a reference
+    // Global counters
     public static int activeSpawners = 0;
     public static int activeEnemies = 0;
 
@@ -26,19 +24,18 @@ public class LevelManager : MonoBehaviour
     {
         if (isLoading) return;
 
-        // 1. Wait 1 second when the game starts to let all spawners register themselves
         if (safetyTimer > 0)
         {
             safetyTimer -= Time.deltaTime;
             return;
         }
 
-        // 2. Win Condition: No spawners are running AND no enemies are alive
+        // Level ends when all spawners are deactivated, and all enemies are defeated
         if (activeSpawners <= 0 && activeEnemies <= 0)
         {
             isLoading = true;
             Debug.Log("Level Complete! Loading next scene...");
-            Invoke("LoadNextMenu", delayBeforeLoading); // Use Invoke to create a brief delay
+            Invoke("LoadNextMenu", delayBeforeLoading); 
         }
     }
 

@@ -12,43 +12,6 @@ public class SaveManager : MonoBehaviour
     public Cannon[] availableCannons;
     public BasicProjectile[] availableProjectiles;
 
-    //private void Start()
-    //{
-    //    //loading current cannons (integers signify type of cannon to be loaded)
-    //    currentTypes.Add(PlayerPrefs.GetInt("leftCannon", 0));
-    //    currentTypes.Add(PlayerPrefs.GetInt("rightCannon", 0));
-
-    //    //current projectiles as strings
-    //    string leftProj = PlayerPrefs.GetString("leftProjectile", "Base");
-    //    string rightProj = PlayerPrefs.GetString("rightProjectile", "Base");
-    //    switch(leftProj)
-    //    {
-    //        case "Base":
-    //            currentProjectiles.Add(availableProjectiles[0]);
-    //            break;
-    //        case "Richochet":
-    //            currentProjectiles.Add(availableProjectiles[1]);
-    //            break;
-    //        case "Homing":
-    //            currentProjectiles.Add(availableProjectiles[2]);
-    //            break;
-    //    }
-
-    //    switch (rightProj)
-    //    {
-    //        case "Base":
-    //            currentProjectiles.Add(availableProjectiles[0]);
-    //            break;
-    //        case "Richochet":
-    //            currentProjectiles.Add(availableProjectiles[1]);
-    //            break;
-    //        case "Homing":
-    //            currentProjectiles.Add(availableProjectiles[2]);
-    //            break;
-    //    }
-    //}
-    
-
     public static void ResetGame()
     {
         //resetting shop

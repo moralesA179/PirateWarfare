@@ -11,11 +11,6 @@ public class HeartIcon : MonoBehaviour
         uiImage = GetComponent<Image>();
     }
 
-    public void Update()
-    {
-        //Debug.Log($"Heart HP: {heartHealth}");
-    }
-
     public int UpdateHeart(int damage)
     {
         heartHealth -= damage;

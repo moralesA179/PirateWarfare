@@ -14,7 +14,7 @@ public class GameOverHandler : MonoBehaviour
             SceneManager.LoadScene("World Map");
         });
 
-        quitButton.onClick.AddListener(() => { //quitting game should no longer save (punishment for death is losing progress!) 
+        quitButton.onClick.AddListener(() => { //quitting game should no longer save
             SceneManager.LoadScene("MainMenu");
         });
     }

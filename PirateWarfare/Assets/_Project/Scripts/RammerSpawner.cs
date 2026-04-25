@@ -2,20 +2,13 @@ using UnityEngine;
 
 public class RammerSpawner : MonoBehaviour
 {
-    [Header("Wave Settings")]
     public GameObject prefabToSpawn;
-    [Tooltip("How long to wait between each wave in seconds")]
     public float timeBetweenWaves = 15f; 
-    [Tooltip("Total number of waves to spawn before stopping")]
     public int maxWaves = 3;
-    [Tooltip("How many enemies spawn at the exact same time per wave")]
     public int enemiesPerWave = 3;
 
-    [Header("Position Settings")]
     public float spawnRadius = 5f;
 
-    [Header("Targeting")]
-    [Tooltip("Drag the Player from your scene into this slot")]
     public Transform targetPlayer;
 
     private float timer;
@@ -24,13 +17,13 @@ public class RammerSpawner : MonoBehaviour
 
     private void Start()
     {
-        LevelManager.activeSpawners++; // Announce that this spawner is active
-        timer = timeBetweenWaves; // First wave spawns immediately
+        LevelManager.activeSpawners++; 
+        timer = timeBetweenWaves; 
     }
 
     void Update()
     {
-        // Shut down the spawner logic and notify LevelManager when finished
+        // Shut down the spawner logic  when finished
         if (currentWave >= maxWaves) 
         {
             if (!isDoneSpawning)

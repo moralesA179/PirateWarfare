@@ -4,12 +4,10 @@ using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     Rigidbody2D rb;
     public float linearSpeed = 3.0f;
     public float angularSpeed = 200.0f;
     Cannon[] cannons;
-    //Testing movement...
     Vector2 movementDir = Vector2.zero;
 
     MusicPlayer musicPlayer;
@@ -35,30 +33,9 @@ public class PlayerMovement : MonoBehaviour
             musicPlayer.Shoot();
         }
 
-        //if (Input.GetKeyDown(KeyCode.F))
-        //{
-        //    PlayerData.currentHealth -= 15;
-        //    Debug.Log("Player new health: " + PlayerData.currentHealth);
-        //}
-
-        //if (Input.GetKeyDown(KeyCode.G))
-        //{
-        //    PlayerData.currentHealth += 15;
-        //    Debug.Log("Player new health: " + PlayerData.currentHealth);
-        //}
-
-        //debug stuff
-        if (Input.GetKeyUp(KeyCode.G))
-        {
-            SceneManager.LoadScene("Shop&Items");
-
-        }
-
-        if (Input.GetKeyUp(KeyCode.B))
-        {
-            PlayerData.score += 100;
-        }
     }
+
+    // Movement
     void FixedUpdate()
     {
         movementDir = Vector2.zero;
@@ -81,8 +58,6 @@ public class PlayerMovement : MonoBehaviour
             angularTarget = -1;
         }
 
-        //Debug.DrawLine(transform.position, transform.position + transform.up); transform up seems to point in correct direction
-        //Debug.Log(movementDir.x + "," + movementDir.y);
         rb.linearVelocity = PlayerData.speedMult * linearSpeed * movementDir.normalized;
         rb.angularVelocity = angularSpeed * angularTarget;
     }

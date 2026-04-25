@@ -2,12 +2,10 @@ using UnityEngine;
 
 public class EnemyShoot : MonoBehaviour
 {
-    [Header("Timing (Randomized)")]
     public float minFireRate = 0.8f;
     public float maxFireRate = 1.8f;
     private float nextFireTime = 0f;
 
-    [Header("Behavior Settings")]
     public bool isBoss = false;
 
     private CircularMovement circularMovement;
@@ -21,11 +19,9 @@ public class EnemyShoot : MonoBehaviour
 
     void Update()
     {
-        // 1. Safety check
         if (circularMovement == null || cannons == null || cannons.Length < 2 || circularMovement.player == null)
             return;
 
-        // 2. Timer check AND Reload check
         if (Time.time >= nextFireTime && circularMovement.canShoot)
         {
             if (!cannons[0].reloading && !cannons[1].reloading)
@@ -38,6 +34,7 @@ public class EnemyShoot : MonoBehaviour
 
     private void ExecuteShot()
     {
+        // Gets the distance of each cannon and chooses the bettter choice
         Vector2 dirToPlayer = (circularMovement.player.position - transform.position).normalized;
         float cannon1Alignment = Vector2.Dot(cannons[0].transform.right, dirToPlayer);
         float cannon2Alignment = Vector2.Dot(cannons[1].transform.right, dirToPlayer);
@@ -48,7 +45,7 @@ public class EnemyShoot : MonoBehaviour
         {
             float aiRoll = Random.value;
 
-            // BOSS LOGIC: 40% chance to fire BOTH sides.
+            // Sometimes fires both cannons for added randomness
             if (aiRoll <= 0.40f)
             {
                 cannons[0].Shoot();
@@ -61,7 +58,6 @@ public class EnemyShoot : MonoBehaviour
         }
         else
         {
-            // NORMAL ENEMY LOGIC: Always optimal single shot
             cannons[bestCannonIndex].Shoot();
         }
     }

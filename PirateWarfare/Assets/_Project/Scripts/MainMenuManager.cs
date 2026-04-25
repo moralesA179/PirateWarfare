@@ -8,7 +8,6 @@ public class MainMenuManager : MonoBehaviour
 
     public Button newGame, loadGame, quitApp;
     public SaveManager tempShopTester;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         newGame.onClick.AddListener(() => {

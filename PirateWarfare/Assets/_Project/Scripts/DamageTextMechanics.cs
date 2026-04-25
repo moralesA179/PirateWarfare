@@ -6,7 +6,6 @@ public class DamageTextMechanics : MonoBehaviour
     public int speed = 3;
     public float scaleFactor = 0.1f;
 
-    // Update is called once per frame
     void Update()
     {
         transform.position += speed * Vector3.up * Time.deltaTime;
@@ -15,6 +14,5 @@ public class DamageTextMechanics : MonoBehaviour
         if (lifeTime <= 0)
             Destroy(gameObject);
         lifeTime--;
-        //Debug.Log($"Scale: {transform.localScale.x}, {transform.localScale.y}");
     }
 }

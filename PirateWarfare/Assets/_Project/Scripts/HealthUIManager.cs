@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class HealthUIManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     public HeartIcon heart;
 
     private static List<HeartIcon> hearts = new List<HeartIcon>();
@@ -55,14 +54,12 @@ public class HealthUIManager : MonoBehaviour
         {
             for (int i = 0; i < hearts.Count; i++)
             {
-                //Debug.Log(healthDiff);
                 if (healthDiff <= 0)
                     break;
                 if (hearts[i].IsFull())
                     continue;
                 int heal = healthDiff >= 20 ? 20 : healthDiff;
                 int excess = hearts[i].UpdateHeart(-heal);
-                //Debug.Log(excess);
                 healthDiff -= 20 - excess;
             }
         }
