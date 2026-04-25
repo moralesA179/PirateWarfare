@@ -12,5 +12,6 @@ public class EnemyTracker : MonoBehaviour
     {
         // When this enemy dies (or is removed), decrease the global count
         LevelManager.activeEnemies--;
+        GameUtilities.currentEnemiesLeft--;
     }
 }

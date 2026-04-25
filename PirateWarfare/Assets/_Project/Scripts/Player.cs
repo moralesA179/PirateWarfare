@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -21,12 +22,17 @@ public class PlayerData : MonoBehaviour
     public static Dictionary<string, Cannon> CannonInventory = new();
     public static Dictionary<string, BasicProjectile> ProjectileInventory = new();
     static Cannon[] cannons;
-
+    public static bool superState = false;
+    public static int superTime = 10000; //time you stay in super state!
+    private static int currentSuperTime = 0;
 
     Animator animator;
 
     private void Awake()
     {
+        //make sure reloading this resets super state always
+        superState = false; 
+        currentSuperTime = 0;
         cannons = GetComponentsInChildren<Cannon>();
         if (SaveManager.currentTypes.Count > 0) //first run
         {
@@ -81,6 +87,15 @@ public class PlayerData : MonoBehaviour
         }
 
         //Debug.Log(string.Join(",", CannonInventory.Keys.ToArray()));
+
+        if (superState)
+        {
+            GetComponent<SpriteRenderer>().color = new Color(Random.value, Random.value, Random.value);
+            Debug.Log($"SUPER STATE ACTIVE: {cannons[0].maxProjectileCount}");
+            if (currentSuperTime <= 0)
+                ExitSuperState();
+            currentSuperTime--;
+        }
 
     }
 
@@ -137,5 +152,25 @@ public class PlayerData : MonoBehaviour
         {
             TakeDamage(20);
         }
+    }
+
+    public static void EnterSuperState(int projectileCount)
+    {
+        foreach(Cannon cannon in cannons)
+        {
+            cannon.maxProjectileCount = projectileCount;
+        }
+        superState = true;
+        currentSuperTime = superTime;
+    }
+
+    public static void ExitSuperState()
+    {
+        foreach (Cannon cannon in cannons)
+        {
+            cannon.maxProjectileCount = 3; //default
+        }
+
+        superState = false;
     }
 }

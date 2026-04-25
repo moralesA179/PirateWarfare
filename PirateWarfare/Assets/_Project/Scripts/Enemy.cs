@@ -21,6 +21,7 @@ public class Enemy : MonoBehaviour
     public float burstStrength = 5f;
 
     public GameObject scrapPrefab;
+    public GameObject[] projectileUpgradePrefabs;
     public TextMeshPro damageNum;
     [Range(0f, 1f)] public float dropChance = 0.3f;
 
@@ -43,7 +44,7 @@ public class Enemy : MonoBehaviour
 
             currentHealth = 0;
             isDead = true;
-            TryDropScrap(); //<-- We can try to edit this later...
+            TryDrop(); //<-- We can try to edit this later...
             PlayerData.score += points;
             Destroy(gameObject);
         }
@@ -71,11 +72,22 @@ public class Enemy : MonoBehaviour
 
     }
 
-    void TryDropScrap()
+    void TryDrop()
     {
-        if (scrapPrefab != null && Random.value <= dropChance)
+        if (projectileUpgradePrefabs != null && scrapPrefab != null)
         {
-            Instantiate(scrapPrefab, transform.position, Quaternion.identity);
+            if(Random.value <= dropChance) //DROP CHANCE % to drop anything
+            {
+                int choice = Random.Range(0, 3);
+                if(choice < projectileUpgradePrefabs.Length) //75% chance to drop any projetile upgrade
+                {
+                    Instantiate(projectileUpgradePrefabs[choice], transform.position, Quaternion.identity);
+                }
+                else //25% chance to drop any scrap
+                {
+                    Instantiate(scrapPrefab, transform.position, Quaternion.identity);
+                }
+            }
         }
     }
 

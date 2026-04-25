@@ -125,6 +125,10 @@ MonoBehaviour:
   currentHealth: 10
   burstStrength: 5
   scrapPrefab: {fileID: 6293482269936185853, guid: 89e054180b6c68549a419b661fd19b9a, type: 3}
+  projectileUpgradePrefabs:
+  - {fileID: 4122642345152072252, guid: 3e1268933ccc28148ae1c5dba0fca7e4, type: 3}
+  - {fileID: 3131127920990070844, guid: b31edd21cd88e114d9eee2f2b8a5a0ad, type: 3}
+  - {fileID: 413209899670583158, guid: 154872bd9a806be4ab218ba0582de07f, type: 3}
   damageNum: {fileID: 4535555547566147689, guid: 1562fcffa25f323408ac1f170c30cf54, type: 3}
   dropChance: 0.3
 --- !u!50 &6103557135784681347

@@ -19,7 +19,7 @@ public class RangerSpawner : MonoBehaviour
     public Transform targetPlayer;
 
     private float timer;
-    private int currentWave = 0;
+    private int currentWave = 0; 
     private bool isDoneSpawning = false;
 
     void Start()

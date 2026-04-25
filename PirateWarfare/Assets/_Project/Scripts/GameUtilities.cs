@@ -15,14 +15,37 @@ public class GameUtilities : MonoBehaviour
     public int heal = 50;
 
 
+    public RangerSpawner[] rangerSpawners;
+    public RammerSpawner[] rammerSpawners;
+    private int totalEnemiesToSpawn = 0;
+    public static int currentEnemiesLeft = 0;
     public Button button, resumeButton, saveButton,quitButton, healButton;
     public GameObject pauseMenu;
-    public TMP_Text scoreText;
+    public TMP_Text scoreText, waveText;
+
 
 
     public void Start()
     {
-        if(button != null)
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        waveText.transform.gameObject.SetActive(currentSceneName.Contains("Level")); //dont show wave counter in world map or other menus
+        if (rangerSpawners != null)
+        {
+            foreach (RangerSpawner rS in rangerSpawners)
+            {
+                totalEnemiesToSpawn += rS.enemiesPerWave * rS.maxWaves;
+            }
+        }
+
+        if (rammerSpawners != null)
+        {
+            foreach(RammerSpawner rS in rammerSpawners)
+            {
+                totalEnemiesToSpawn += rS.enemiesPerWave * rS.maxWaves;
+            }
+        }
+        currentEnemiesLeft = totalEnemiesToSpawn;
+        if (button != null)
             button.onClick.AddListener(() => { PlayerData.TakeDamage(damage); });
         if(resumeButton != null)
             resumeButton.onClick.AddListener(() => { Time.timeScale = 1f; pauseMenu.SetActive(false); });
@@ -57,5 +80,8 @@ public class GameUtilities : MonoBehaviour
         {
             scoreText.text = $"Score: {PlayerData.score}";
         }
+
+        if(waveText.IsActive())
+            waveText.text = $"Enemies Left: {currentEnemiesLeft} / {totalEnemiesToSpawn}";
     }
 }
