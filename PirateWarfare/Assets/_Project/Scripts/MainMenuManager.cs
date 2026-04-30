@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class MainMenuManager : MonoBehaviour
 {
 
-    public Button newGame, loadGame, quitApp;
+    public Button newGame, loadGame, quitApp, creditsButton;
+    public GameObject creditsPopup;
     public SaveManager tempShopTester;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -27,6 +28,10 @@ public class MainMenuManager : MonoBehaviour
             EditorApplication.isPlaying = false;
             #endif
             Application.Quit();
+        });
+        creditsButton.onClick.AddListener(() =>
+        {
+            creditsPopup.SetActive(!creditsPopup.activeSelf);
         });
     }
 
