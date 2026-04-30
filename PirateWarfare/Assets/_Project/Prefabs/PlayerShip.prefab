@@ -5058,6 +5058,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7a79895366c89aa44bbaa2898914ea18, type: 3}
   - {fileID: 8300000, guid: 834b276891c4c7e4f9ba254b2b713d92, type: 3}
   playIntro: 1
+  sailSource: {fileID: 0}
 --- !u!82 &3744298806179930370
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5071,7 +5072,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.05
   m_Pitch: 1
   Loop: 0
   Mute: 0

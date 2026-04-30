@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 public class GameUtilities : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     [Range(0, 100)]
     public int damage = 50;
 
@@ -62,8 +61,6 @@ public class GameUtilities : MonoBehaviour
             quitButton.onClick.AddListener(() => {
                 SceneManager.LoadScene("MainMenu");
             });
-        //if (healButton != null)
-        //    healButton.onClick.AddListener(() => { PlayerData.Heal(heal); });
     }
 
 
@@ -71,7 +68,6 @@ public class GameUtilities : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            //Debug.Log("I was in here!!!");
             pauseMenu.SetActive(true);
             Time.timeScale = 0f;
         }

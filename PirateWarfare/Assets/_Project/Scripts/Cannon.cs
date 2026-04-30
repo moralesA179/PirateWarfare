@@ -12,7 +12,7 @@ public class Cannon : MonoBehaviour
     public bool enemy = false; //used to determine what type of projectile to shoot (friendly or not)
 
     public bool boss = false;
-    public float bossScaleMultiplier = 2f; // Added multiplier for boss projectile size
+    public float bossScaleMultiplier = 2f; // multiplier for boss projectile size
 
     public enum CannonTypes { Base, Shotgun, Burst };
     public CannonTypes type;
@@ -24,22 +24,19 @@ public class Cannon : MonoBehaviour
     public int bonusProjectileCount = 0;
     public float projectileBoostTimer = 0f;
 
-    [Header("Reload Settings")]
-    [Tooltip("Time in SECONDS the reload takes to complete.")]
-    public float reloadTimeInSeconds = 1.5f; // Replaced targetDelay
-    private float currentReloadTimer = 0f;   // Replaced currentDelay
+    public float reloadTimeInSeconds = 1.5f;
+    private float currentReloadTimer = 0f;  
 
     private void Update()
     {
-        // Time-based reload logic
         if (reloading && burstDone)
         {
-            currentReloadTimer += Time.deltaTime; // Add the time passed since last frame
+            currentReloadTimer += Time.deltaTime;
 
             if (currentReloadTimer >= reloadTimeInSeconds)
             {
-                reloading = false; // Done reloading
-                currentReloadTimer = 0f; // Reset timer
+                reloading = false;
+                currentReloadTimer = 0f;
             }
         }
         else if (!reloading)
@@ -47,7 +44,6 @@ public class Cannon : MonoBehaviour
             currentReloadTimer = 0f;
         }
 
-        //Count down temporary projectile boost
         if (projectileBoostTimer > 0f)
         {
             projectileBoostTimer -= Time.deltaTime;
@@ -100,9 +96,9 @@ public class Cannon : MonoBehaviour
     {
         BasicProjectile cannonBall;
         Rigidbody2D rb;
-        Collider2D shipCollider = GetComponentInParent<Collider2D>(); // Added collider reference
+        Collider2D shipCollider = GetComponentInParent<Collider2D>(); 
 
-        if (projectile != null && !reloading && burstDone) //if bullet exists and your arent currently reloading
+        if (projectile != null && !reloading && burstDone)
         {
             switch (type)
             {
@@ -133,11 +129,11 @@ public class Cannon : MonoBehaviour
         IEnumerator BurstShot()
         {
             reloading = true;
-            burstDone = false; //extra field to ensure countdown doesn't start while we are still burst firing!
+            burstDone = false; // countdown doesn't start while we are still burst firing
 
             int projectileCount = GetCurrentProjectileCount();
 
-            for (int i = 0; i < projectileCount; i++) // Fixed: Used projectileCount to allow powerups to work
+            for (int i = 0; i < projectileCount; i++) 
             {
                 cannonBall = Instantiate(projectile, transform.position, Quaternion.identity);
                 if (boss) cannonBall.transform.localScale *= bossScaleMultiplier; // Apply boss scale
@@ -167,7 +163,7 @@ public class Cannon : MonoBehaviour
                 return;
             }
 
-            int remainder = projectileCount - 1; // Fixed: Used projectileCount to allow powerups to work
+            int remainder = projectileCount - 1; 
             float angleStep = 90f / remainder; // 45 for 2; for even bullet counts this angle step leads to there not being a straight shot bullet as it skips over 0 degs
             for (float i = -45f; i <= 45; i += angleStep)
             {

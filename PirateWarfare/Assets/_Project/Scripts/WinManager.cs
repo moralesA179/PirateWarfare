@@ -11,7 +11,6 @@ public class WinManager : MonoBehaviour
     public int rotationDegs = 3;
     private bool goLeft = true, scaleUp = true;
     public float maxScale = 1.5f, minScale = 0.5f;
-    // Update is called once per frame
     
     void Update()
     {
@@ -21,7 +20,7 @@ public class WinManager : MonoBehaviour
             scaleUp = false;
         if (winText.transform.localScale.x <= minScale)
             scaleUp = true;
-        //Debug.Log(currentRotation);
+
         //bouncing between positive and negative bounds...
         if (currentRotation > maxRotation)
         {
@@ -37,9 +36,6 @@ public class WinManager : MonoBehaviour
             SceneManager.LoadScene("MainMenu");
         winText.transform.Rotate(Vector3.forward, goLeft ? rotationDegs * Time.deltaTime : -rotationDegs * Time.deltaTime);
         winText.transform.localScale += scaleUp ? new Vector3(0.1f * Time.deltaTime, 0.1f * Time.deltaTime) : new Vector3(-0.1f * Time.deltaTime, -0.1f * Time.deltaTime);
-
-
-
 
     }
 }

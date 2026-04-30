@@ -18,12 +18,11 @@ public class PlayerData : MonoBehaviour
     public static int maxHealth = 100, currentHealth = 80, score = 0;
     public static float speedMult = 1f;
     public static int baseDamage = 5;
-    //public static ItemList[] <-- Future(We need to keep track of current items player has)
     public static Dictionary<string, Cannon> CannonInventory = new();
     public static Dictionary<string, BasicProjectile> ProjectileInventory = new();
     static Cannon[] cannons;
     public static bool superState = false;
-    public static int superTime = 10000; //time you stay in super state!
+    public static int superTime = 10000; //time you stay in super state
     private static int currentSuperTime = 0;
 
     Animator animator;
@@ -86,8 +85,6 @@ public class PlayerData : MonoBehaviour
             animator.SetInteger("HealthState", (int)HealthState.Full);
         }
 
-        //Debug.Log(string.Join(",", CannonInventory.Keys.ToArray()));
-
         if (superState)
         {
             GetComponent<SpriteRenderer>().color = new Color(Random.value, Random.value, Random.value);
@@ -108,7 +105,6 @@ public class PlayerData : MonoBehaviour
         { 
 
             SceneManager.LoadScene("GameOver");
-            //Debug.Log("This ran");
         }
     }
 

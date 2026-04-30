@@ -3,7 +3,7 @@ using UnityEngine.AI;
 
 public class EnemyMovement : MonoBehaviour
 {
-    public Transform player; // assign your Player in the Inspector
+    public Transform player; 
     private NavMeshAgent agent;
     public float rotationSpeed = 360.0f;
 

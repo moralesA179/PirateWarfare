@@ -44,7 +44,7 @@ public class Enemy : MonoBehaviour
 
             currentHealth = 0;
             isDead = true;
-            TryDrop(); //<-- We can try to edit this later...
+            TryDrop(); 
             PlayerData.score += points;
             Destroy(gameObject);
         }
@@ -68,7 +68,6 @@ public class Enemy : MonoBehaviour
             animator.SetInteger("HealthState", (int)HealthState.Full);
         }
 
-        //Debug.Log("Enemy Current Health: " + currentHealth);
 
     }
 
@@ -105,13 +104,9 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            // 1. Calculate the direction away from the player
+            // After a collision push the enemy away so there isn't repeat damage
             Vector2 pushDirection = (transform.position - collision.transform.position).normalized;
-
-            // 2. Kill current momentum so the burst feels consistent
             rb.linearVelocity = Vector2.zero;
-
-            // 3. Apply the instant burst
             rb.AddForce(pushDirection * burstStrength, ForceMode2D.Impulse);
 
             TakeDamage(5);

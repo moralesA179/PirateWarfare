@@ -2,20 +2,13 @@ using UnityEngine;
 
 public class RangerSpawner : MonoBehaviour
 {
-    [Header("Wave Settings")]
     public GameObject prefabToSpawn;
-    [Tooltip("How long to wait between each wave in seconds")]
     public float timeBetweenWaves = 15f;
-    [Tooltip("Total number of waves to spawn before stopping")]
     public int maxWaves = 3;
-    [Tooltip("How many enemies spawn at the exact same time per wave")]
     public int enemiesPerWave = 3;
 
-    [Header("Position Settings")]
     public float spawnRadius = 5f;
 
-    [Header("Targeting")]
-    [Tooltip("Drag the Player from your scene into this slot")]
     public Transform targetPlayer;
 
     private float timer;
@@ -24,16 +17,13 @@ public class RangerSpawner : MonoBehaviour
 
     void Start()
     {
-        // Announce to LevelManager that this spawner is active
         LevelManager.activeSpawners++;
-
-        // Start the timer at the max value so the first wave spawns immediately 
         timer = timeBetweenWaves;
     }
 
     void Update()
     {
-        // Shut down the spawner and notify LevelManager when all waves are out
+        // Shut down the spawner when done
         if (currentWave >= maxWaves)
         {
             if (!isDoneSpawning)
@@ -58,7 +48,6 @@ public class RangerSpawner : MonoBehaviour
     {
         if (prefabToSpawn == null)
         {
-            Debug.LogWarning("Spawner doesn't have a prefab assigned!");
             return;
         }
 
@@ -71,7 +60,7 @@ public class RangerSpawner : MonoBehaviour
 
             if (targetPlayer != null)
             {
-                // Assigning to CircularMovement specifically for the Ranger
+                // Assigning to CircularMovement for the Ranger
                 CircularMovement movementScript = spawnedEnemy.GetComponent<CircularMovement>();
                 if (movementScript != null)
                 {
@@ -80,7 +69,8 @@ public class RangerSpawner : MonoBehaviour
             }
         }
     }
-
+    
+    // Show where the spawner is 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
