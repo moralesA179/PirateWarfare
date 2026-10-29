@@ -18,11 +18,3 @@ Take command of a pirate ship in this 2D top-down arena shooter! Battle waves of
 3. **Combat Programming, Game Systems & UI:** [Antonio Morales](https://github.com/moralesA179)
 4. **Enemy AI & Pathfinding:** [Bryce Harvey](https://github.com/bharvey2023)
 5. **Level & Environment Design:** [Cgomez2](https://github.com/Cgomez2)
-
-## Source Code
-
-Interested in how the game was built? Check out the [source code on GitHub](https://github.com/EdgarQuinones/PirateWarfare).
-
-## Play Now
-
-Interested in playing? Play Pirate Warfare on itch.io! *(Add game link here.)*
