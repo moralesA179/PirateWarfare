@@ -1,2 +1,28 @@
 # Pirate Warfare
-A 2D arena shooter where players fight to survive waves of enemy ships, featuring fast-paced combat and wave-based progression.
+
+## About the Game
+
+Take command of a pirate ship in this 2D top-down arena shooter! Battle waves of enemy ships, explore different islands, and survive increasingly challenging encounters. Upgrade your ship, collect resources, and experiment with different cannon types as you fight your way through enemy fleets.
+
+## Controls
+
+- **W / S:** Move forward and backward
+- **A / D:** Rotate ship left and right
+- **Left Click:** Fire left cannons
+- **Right Click:** Fire right cannons
+
+## Credits
+
+1. **Project Lead, Level Integration & Gameplay Polish:** [Edgar Quinones](https://github.com/EdgarQuinones)
+2. **Game Concept, Music & Sound Design:** [Cody Copple](https://github.com/cacopple)
+3. **Combat Programming, Game Systems & UI:** [Antonio Morales](https://github.com/moralesA179)
+4. **Enemy AI & Pathfinding:** [Bryce Harvey](https://github.com/bharvey2023)
+5. **Level & Environment Design:** [Cgomez2](https://github.com/Cgomez2)
+
+## Source Code
+
+Interested in how the game was built? Check out the [source code on GitHub](https://github.com/EdgarQuinones/PirateWarfare).
+
+## Play Now
+
+Interested in playing? Play Pirate Warfare on itch.io! *(Add game link here.)*
